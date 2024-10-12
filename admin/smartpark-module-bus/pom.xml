@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>smartpark</artifactId>
+        <groupId>cn.sdqingyun.cloud</groupId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>smartpark-module-bus</artifactId>
+    <packaging>pom</packaging>
+
+    <name>${project.artifactId}</name>
+    <description>
+        bus 模块,主要是业务模块的实现
+    </description>
+    <modules>
+        <module>smartpark-module-bus-api</module>
+        <module>smartpark-module-bus-biz</module>
+    </modules>
+
+</project>

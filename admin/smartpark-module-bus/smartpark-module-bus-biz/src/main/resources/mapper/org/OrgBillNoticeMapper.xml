@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sdqingyun.smartpark.module.bus.dal.mysql.org.OrgBillNoticeMapper">
+
+    <!--
+        一般情况下，尽可能使用 Mapper 进行 CRUD 增删改查即可。
+        无法满足的场景，例如说多表关联查询，才使用 XML 编写 SQL。
+        代码生成器暂时只生成 Mapper XML 文件本身，更多推荐 MybatisX 快速开发插件来生成查询。
+        智慧园区
+     -->
+
+    <select id="getNoticeListPage" resultType="cn.sdqingyun.smartpark.module.bus.controller.admin.org.vo.NoticeListVO">
+        SELECT a.id AS "id",
+        a.contract_bill_id AS "contractBillId",
+        b.`name` AS "ownerName",
+        c.build_name AS "buildName",
+        d.room_number AS "roomNumber",
+        a.sms_status AS "smsStatus",
+        a.email_status AS "emailStatus",
+        a.mail_status AS "mailStatus",
+        DATE_FORMAT(a.create_time,'%Y-%m-%d') AS "createTime"
+        FROM org_bill_notice a
+        LEFT JOIN `owner` b ON a.owner_id = b.id
+        LEFT JOIN village_build c ON c.id = a.build_id
+        LEFT JOIN contract d ON d.id = a.contract_id
+        WHERE a.deleted = '0'
+        <if test="param.ownerName !=null and param.ownerName !=''">
+            and b.`name` like CONCAT('%',#{param.ownerName},'%')
+        </if>
+        <if test="param.buildIdList !=null and param.buildIdList.size()>0">
+            and a.build_id in
+            <foreach collection="param.buildIdList" item="buildId" open="(" separator="," close=")">
+                #{buildId}
+            </foreach>
+        </if>
+        <if test="param.smsStatus !=null and param.smsStatus !=''">
+            and a.sms_status=#{param.smsStatus}
+        </if>
+        <if test="param.emailStatus !=null and param.emailStatus !=''">
+            and a.email_status=#{param.emailStatus}
+        </if>
+        <if test="param.mailStatus !=null and param.mailStatus !=''">
+            and a.mail_status=#{param.mailStatus}
+        </if>
+        <if test="param.startCreateTime !=null and param.startCreateTime !=''">
+            and DATE_FORMAT(a.create_time,'%Y-%m-%d') BETWEEN #{param.startCreateTime} and #{param.endCreateTime}
+        </if>
+        order by a.create_time desc
+    </select>
+</mapper>

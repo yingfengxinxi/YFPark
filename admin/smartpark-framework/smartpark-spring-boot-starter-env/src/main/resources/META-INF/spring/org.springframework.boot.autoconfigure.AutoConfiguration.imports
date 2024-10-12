@@ -1,0 +1,2 @@
+cn.sdqingyun.smartpark.framework.env.config.SmartparkEnvWebAutoConfiguration
+cn.sdqingyun.smartpark.framework.env.config.SmartparkEnvRpcAutoConfiguration

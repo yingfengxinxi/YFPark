@@ -1,0 +1,2 @@
+cn.sdqingyun.smartpark.framework.quartz.config.SmartparkXxlJobAutoConfiguration
+cn.sdqingyun.smartpark.framework.quartz.config.SmartparkAsyncAutoConfiguration

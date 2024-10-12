@@ -1,0 +1,2 @@
+cn.sdqingyun.smartpark.framework.redis.config.SmartparkRedisAutoConfiguration
+cn.sdqingyun.smartpark.framework.redis.config.SmartparkCacheAutoConfiguration

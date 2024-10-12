@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>smartpark-module-bus</artifactId>
+        <groupId>cn.sdqingyun.cloud</groupId>
+        <version>${revision}</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>smartpark-module-bus-biz</artifactId>
+    <packaging>jar</packaging>
+
+    <name>${project.artifactId}</name>
+    <description>
+        bus 模块 BIZ 层,业务模块
+    </description>
+
+    <dependencies>
+        <!-- Spring Cloud 基础 -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-bootstrap</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-module-system-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-module-crm-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-module-bpm-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-module-bus-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.deepoove</groupId>
+            <artifactId>poi-tl</artifactId>
+            <version>1.10.0</version>
+        </dependency>
+
+        <!-- 业务组件 -->
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-spring-boot-starter-biz-data-permission</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-spring-boot-starter-biz-tenant</artifactId>
+        </dependency>
+
+        <!-- Web 相关 -->
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-spring-boot-starter-security</artifactId>
+        </dependency>
+
+        <!-- DB 相关 -->
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-spring-boot-starter-mybatis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-spring-boot-starter-redis</artifactId>
+        </dependency>
+
+        <!-- RPC 远程调用相关 -->
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-spring-boot-starter-rpc</artifactId>
+        </dependency>
+
+        <!-- Registry 注册中心相关 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+
+        <!-- Config 配置中心相关 -->
+        <dependency>
+            <groupId>com.alibaba.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+        </dependency>
+
+        <!-- 服务保障相关 -->
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-spring-boot-starter-protection</artifactId>
+        </dependency>
+        <!-- Job 定时任务相关 -->
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-spring-boot-starter-job</artifactId>
+        </dependency>
+
+        <!-- 消息队列相关 -->
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-spring-boot-starter-mq</artifactId>
+        </dependency>
+        <!-- Test 测试相关 -->
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-spring-boot-starter-test</artifactId>
+        </dependency>
+
+        <!-- 监控相关 -->
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-spring-boot-starter-monitor</artifactId>
+        </dependency>
+
+        <!-- 工具类相关 -->
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-spring-boot-starter-excel</artifactId>
+        </dependency>
+
+        <!-- Flowable 工作流相关 -->
+        <dependency>
+            <groupId>org.flowable</groupId>
+            <artifactId>flowable-spring-boot-starter-process</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flowable</groupId>
+            <artifactId>flowable-spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.xuxueli</groupId>
+            <artifactId>xxl-job-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>cn.sdqingyun.cloud</groupId>
+            <artifactId>smartpark-module-pay-api</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.itextpdf</groupId>
+            <artifactId>itextpdf</artifactId>
+            <version>5.5.13.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>2.0.29</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <!-- 设置构建的 jar 包名 -->
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <!-- 打包 -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>${spring.boot.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal> <!-- 将引入的 jar 打入其中 -->
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

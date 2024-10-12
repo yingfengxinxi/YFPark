@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sdqingyun.smartpark.module.bus.dal.mysql.contract.ContractOrderBillMapper">
+
+
+    <!--
+        一般情况下，尽可能使用 Mapper 进行 CRUD 增删改查即可。
+        无法满足的场景，例如说多表关联查询，才使用 XML 编写 SQL。
+        代码生成器暂时只生成 Mapper XML 文件本身，更多推荐 MybatisX 快速开发插件来生成查询。
+        智慧园区
+     -->
+
+    <select id="getByContractIdCompyOrderBillList"
+            resultType="cn.sdqingyun.smartpark.module.bus.controller.admin.contract.vo.ContractIdCompyOrderBillListVO">
+        SELECT b.fee_type as "feeType",
+        b.receivable as "receivable",
+        (CASE WHEN b.bill_status = '1' THEN b.receivable ELSE '0.00' END) AS "ssReceivable",
+        v.`name`as "parkName",
+        b.tax_amount as "taxAmount",
+        b.pay_date as "payDate",
+        b.bill_status as "billStatus",
+        a.room_number as "roomNumber"
+        FROM contract a
+        LEFT JOIN contract_order_bill b ON a.id = b.contract_id
+        LEFT JOIN village v ON v.id = a.park_id
+        WHERE a.`status` != '0' and a.deleted='0'
+        AND b.contract_id = #{contractId}
+        AND b.bill_type='1'
+        <if test="startPayDate !=null and startPayDate !=''">
+            AND DATE_FORMAT(b.pay_date,'%Y-%m-%d') BETWEEN #{startPayDate} AND #{endPayDate}
+        </if>
+        ORDER BY b.number ASC
+    </select>
+
+    <select id="getByContractIdRentingTerminationBondBillList"
+            resultType="cn.sdqingyun.smartpark.module.bus.dal.dataobject.contract.ContractOrderBillDO">
+        SELECT a.id,
+               a.pay_start_date,
+               pay_end_date,
+               a.receivable,
+               a.fee_type,
+               a.pay_date,
+               a.contract_id,
+               a.count,
+               a.final_unit_price,
+               a.data_source,
+               "2" as billType
+        FROM contract_order_bill a
+        WHERE a.bill_status = '1'
+          AND a.fee_type IN ('0', '3')
+          AND a.contract_id = #{contractId}
+        ORDER BY a.pay_start_date
+    </select>
+
+    <select id="getByContractIdRentingTerminationBillList"
+            resultType="cn.sdqingyun.smartpark.module.bus.dal.dataobject.contract.ContractOrderBillDO">
+        SELECT a.flag                                    AS "flag",
+               a.id                                      AS "id",
+               DATE_FORMAT(a.pay_start_date, '%Y-%m-%d') AS "payStartDateStr",
+               DATE_FORMAT(a.pay_end_date, '%Y-%m-%d')   AS "payEndDateStr",
+               a.receivable                              AS "receivable",
+               a.fee_type                                AS "feeType",
+               a.costTypeName                            AS "costTypeName",
+               a.pay_date                                AS "payDate",
+               a.count                                   AS "count",
+               a.final_unit_price                        AS "finalUnitPrice",
+               a.data_source                             AS "dataSource",
+               a.receivable_payment                      AS "receivablePayableAmount",
+               a.bill_type                               AS "billType"
+        FROM (SELECT "0"      AS "flag",
+                     a.id,
+                     a.fee_type,
+                     b.`name` AS "costTypeName",
+                     a.pay_start_date,
+                     a.pay_end_date,
+                     a.receivable,
+                     a.receivable_payment,
+                     a.pay_date,
+                     a.contract_id,
+                     a.count,
+                     a.final_unit_price,
+                     a.data_source,
+                     a.bill_type
+              FROM contract_order_bill a
+                       LEFT JOIN org_bill_cost_type b ON a.fee_type = b.id
+              WHERE a.bill_status = '1'
+                AND b.is_bond = '0'
+                AND DATE_FORMAT(a.pay_start_date, '%Y-%m-%d') >= DATE_FORMAT(NOW(), '%Y-%m-%d')
+              UNION ALL
+              SELECT "1"      AS "flag",
+                     a.id,
+                     a.fee_type,
+                     b.`name` AS "costTypeName",
+                     a.pay_start_date,
+                     a.pay_end_date,
+                     a.receivable,
+                     a.receivable_payment,
+                     a.pay_date,
+                     a.contract_id,
+                     a.count,
+                     a.final_unit_price,
+                     a.data_source,
+                     a.bill_type
+              FROM contract_order_bill a
+                       LEFT JOIN org_bill_cost_type b ON a.fee_type = b.id
+              WHERE a.bill_status = '2'
+                AND b.is_bond = '0') a
+        WHERE a.contract_id = #{contractId}
+        ORDER BY a.pay_start_date
+    </select>
+
+    <select id="getPaymentNoticeList"
+            resultType="cn.sdqingyun.smartpark.module.bus.dal.dataobject.contract.ContractOrderBillDO">
+        select a.id                                as "id",
+               a.contract_id                       as "contractId",
+               a.order_number                      as "orderNumber",
+               a.number                            as "number",
+               a.pay_start_date                    as "payStartDate",
+               a.pay_end_date                      as "payEndDate",
+               a.fee_type                          as "feeType",
+               DATE_FORMAT(a.pay_date, '%Y-%m-%d') AS "payDateStr",
+               a.final_unit_price                  as "finalUnitPrice",
+               a.receivable                        as "receivable",
+               a.tax_amount                        as "taxAmount",
+               a.bill_status                       as "billStatus",
+               a.pay_time                          as "payTime",
+               a.bill_type                         as "billType",
+               a.late_fee                          as "lateFee",
+               a.overdue_day                       as "overdueDay"
+        from contract_order_bill a
+        where a.bill_status = '0'
+          AND a.fee_type IN ('1', '4')
+          and DATE_FORMAT(a.pay_date, '%Y-%m-%d') = DATE_FORMAT(NOW(), '%Y-%m-%d')
+    </select>
+
+    <select id="getBeOverdueList"
+            resultType="cn.sdqingyun.smartpark.module.bus.dal.dataobject.contract.ContractOrderBillDO">
+
+        select a.id                    as "id",
+               a.contract_id           as "contractId",
+               a.order_number          as "orderNumber",
+               a.number                as "number",
+               a.pay_start_date        as "payStartDate",
+               a.pay_end_date          as "payEndDate",
+               a.fee_type              as "feeType",
+               a.pay_date              as "payDate",
+               a.final_unit_price      as "finalUnitPrice",
+               a.receivable            as "receivable",
+               a.tax_amount            as "taxAmount",
+               a.bill_status           as "billStatus",
+               a.pay_time              as "payTime",
+               a.bill_type             as "billType",
+               a.late_fee              as "lateFee",
+               a.overdue_day           as "overdueDay",
+               a.starting_late_fee_day as "startingLateFeeDay",
+               a.late_fee_ratio        as "lateFeeRatio",
+               a.upper_limit_late_fee  as "upperLimitLateFee"
+        from contract_order_bill a
+                 LEFT JOIN contract b on a.contract_id = b.id
+        where a.bill_status in ('0', '2')
+          AND a.fee_type IN ('1', '4')
+          AND b.`status`!='0'
+          and DATE_FORMAT(a.pay_date, '%Y-%m-%d') &lt; DATE_FORMAT(NOW(), '%Y-%m-%d')
+    </select>
+
+    <update id="updateByIdBillLateFeeOverdue">
+        update contract_order_bill
+        set bill_status=#{billStatus},
+            late_fee=#{lateFee},
+            generate_late_fee=#{lateFee},
+            late_fee_pay_status='1',
+            overdue_day=#{overdueDay}
+        where id = #{id}
+    </update>
+
+    <select id="getByOwnerIdRoomIdBillList"
+            resultType="cn.sdqingyun.smartpark.module.bus.dal.dataobject.contract.ContractOrderBillDO">
+        SELECT a.id as "id",
+        DATE_FORMAT(a.pay_date, '%Y-%m') as "payDateStr",
+        a.pay_date as "payDate",
+        a.fee_type as "feeType",
+        a.pay_start_date as "payStartDate",
+        a.pay_end_date as "payEndDate",
+        a.receivable as "receivable",
+        a.late_fee as "lateFee",
+        a.overdue_day as "overdueDay",
+        (a.receivable + a.late_fee) AS "receivablePayableAmount",
+        a.bill_status as "billStatus",
+        a.receivable_payment as "receivablePayment",
+        b.id as "contractId"
+        FROM contract_order_bill a
+        LEFT JOIN contract b ON a.contract_id = b.id
+        WHERE b.owner_id = #{ownerId}
+        AND REGEXP_LIKE(b.room_number, '(^|,)' + #{roomId} + '($|,)')
+        <if test="billStatusList!=null and billStatusList.size()>0">
+            AND a.bill_status in
+            <foreach collection="billStatusList" item="billStatus" open="(" separator="," close=")">
+                #{billStatus}
+            </foreach>
+        </if>
+        <if test="isAccountsReceivable!=null and isAccountsReceivable!=''">
+            AND DATE_FORMAT(a.pay_date, '%Y-%m') &lt;= DATE_FORMAT(NOW(), '%Y-%m')
+        </if>
+        ORDER BY a.number
+    </select>
+
+    <select id="getByOwnerIdRoomIdCashierBillList"
+            resultType="cn.sdqingyun.smartpark.module.bus.dal.dataobject.contract.ContractOrderBillDO">
+        SELECT a.id as "id",
+        DATE_FORMAT(a.pay_date, '%Y-%m') as "payDateStr",
+        a.pay_date as "payDate",
+        a.fee_type as "feeType",
+        a.pay_start_date as "payStartDate",
+        a.pay_end_date as "payEndDate",
+        a.receivable as "receivable",
+        a.late_fee as "lateFee",
+        a.overdue_day as "overdueDay",
+        (a.receivable + a.late_fee) AS "receivablePayableAmount",
+        a.bill_status as "billStatus",
+        a.receivable_payment as "receivablePayment",
+        b.id as "contractId"
+        FROM contract_order_bill a
+        LEFT JOIN contract b ON a.contract_id = b.id
+        WHERE b.owner_id = #{ownerId}
+        <if test="billStatusList!=null and billStatusList.size()>0">
+            AND a.bill_status in
+            <foreach collection="billStatusList" item="billStatus" open="(" separator="," close=")">
+                #{billStatus}
+            </foreach>
+        </if>
+        <if test="isAccountsReceivable!=null and isAccountsReceivable!=''">
+            AND DATE_FORMAT(a.pay_date, '%Y-%m') &lt;= DATE_FORMAT(NOW(), '%Y-%m')
+        </if>
+        ORDER BY a.number
+    </select>
+    <select id="getByIdBillList" resultType="cn.sdqingyun.smartpark.module.bus.controller.admin.contract.vo.BillListVO">
+        SELECT DISTINCT
+        b.owner_id as "ownerId",
+        a.id as "id",
+        a.contract_id as "contractId"
+        FROM
+        contract_order_bill a
+        LEFT JOIN contract b ON a.contract_id = b.id
+        WHERE
+        b.deleted = '0'
+        AND a.id IN
+        <foreach collection="idList" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+
+    <select id="getCollectionBillList"
+            resultType="cn.sdqingyun.smartpark.module.bus.controller.admin.contract.vo.ContractOrderBillCollectionVO">
+        SELECT
+        a.id AS "id",
+        a.contract_id AS "contractId",
+        a.fee_type AS "feeType",
+        a.bill_status AS "billStatus",
+        (a.receivable + a.late_fee) AS "receivablePayableAmount",
+        a.pay_date AS "payDate",
+        a.pay_start_date AS "payStartDate",
+        a.pay_end_date AS "payEndDate",
+        a.receivable_payment AS "receivablePayment",
+        DATE_FORMAT(NOW(),'%Y-%m-%d') as "incomeDate"
+        FROM
+        contract_order_bill a
+        WHERE
+        a.deleted = '0'
+        AND a.id IN
+        <foreach collection="ids" item="id" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+        order by a.pay_start_date asc
+    </select>
+
+    <update id="updateOrderBillReceivablePayment">
+        UPDATE contract_order_bill
+        set receivable_payment=receivable_payment + #{thisPayment}
+        where id = #{id}
+    </update>
+    <update id="updateByContractIdCloseStatus">
+        update contract_order_bill
+        set close_status=#{closeStatus}
+        where contract_id = #{contractId}
+    </update>
+
+    <select id="getBillList" resultType="cn.sdqingyun.smartpark.module.bus.controller.admin.contract.vo.GetBillListVO">
+        SELECT
+        b.id AS "billId",
+        c.`name` AS "villageName",
+        d.build_name AS "buildName",
+        e.`name` AS "ownerName",
+        a.room_number AS "roomNumber",
+        f.label AS "feeType",
+        ( b.receivable + b.late_fee ) AS "receivable",
+        a.match_price AS "matchPrice",
+        b.pay_date AS "payDate",
+        b.pay_start_date AS "payStartDate",
+        b.pay_end_date AS "payEndDate"
+        FROM
+        org_bill_stream a
+        INNER JOIN contract_order_bill b ON b.id = a.bill_id
+        INNER JOIN village c ON c.id = a.village_id
+        INNER JOIN village_build d ON d.id = a.build_id
+        LEFT JOIN `owner` e ON e.id = a.owner_id
+        LEFT JOIN system_dict_data f ON f.dict_type = 'fee_type'
+        AND f.`value` = b.fee_type
+        WHERE
+        a.owner_id = #{ownerId} and a.match_status!='1'
+        AND ( SELECT count( 1 ) FROM org_bill_stream_middle bsm WHERE bsm.stream_id = a.id AND bsm.match_status != '4' )
+        &lt;= 0
+        AND b.bill_type = #{billType}
+        ORDER BY
+        b.pay_start_date ASC
+    </select>
+
+<!--    <select id="getBillList" resultType="cn.sdqingyun.smartpark.module.bus.controller.admin.contract.vo.GetBillListVO">-->
+<!--        SELECT-->
+<!--        a.room_number AS "roomNumber",-->
+<!--        a.match_price AS "matchPrice"-->
+<!--        FROM-->
+<!--        org_bill_stream a-->
+<!--        WHERE-->
+<!--        a.owner_id = #{ownerId}-->
+<!--        <if test="roomNumberList !=null and roomNumberList.size()>0">-->
+<!--            and-->
+<!--            <foreach collection="roomNumberList" item="roomNumber" open="(" separator="OR" close=")">-->
+<!--                REGEXP_LIKE(a.room_number, '(^|,)' + #{roomNumber} +  '($|,)')-->
+<!--            </foreach>-->
+<!--        </if>-->
+
+<!--    </select>-->
+
+    <select id="getOwnerIdOverdueIds" resultType="java.lang.Long">
+        SELECT
+        a.id as "id"
+        FROM
+        contract_order_bill a
+        LEFT JOIN contract b ON a.contract_id = b.id
+        <where>
+            <if test="ownerId!=null">
+                AND b.owner_id = #{ownerId}
+            </if>
+            <if test="roomId!=null">
+                AND REGEXP_LIKE (
+                b.room_number,
+                '(^|,)' + #{roomId} + '($|,)')
+            </if>
+            AND a.bill_status = '2'
+        </where>
+
+
+    </select>
+
+    <select id="getOwnerIdAmountCollectedTotal" resultType="java.math.BigDecimal">
+        SELECT SUM(( a.receivable + a.late_fee ))-SUM(receivable_payment) AS "receivable"
+        FROM contract_order_bill a
+        LEFT JOIN contract b ON b.id = a.contract_id
+        WHERE
+        a.bill_status in ('0', '2')
+        <if test="ownerId !=null">
+            AND b.owner_id =#{ownerId}
+        </if>
+        <if test="roomId !=null">
+            and REGEXP_LIKE(
+            b.room_number,
+            '(^|,)' + #{roomId} + '($|,)')
+        </if>
+
+    </select>
+
+    <select id="getOwnerIdReceivableTotal" resultType="java.math.BigDecimal">
+        SELECT SUM((a.receivable + a.late_fee)) AS "receivable"
+        FROM contract_order_bill a
+        LEFT JOIN contract b ON b.id = a.contract_id
+        WHERE
+        a.bill_status in ('0','1', '2')
+        <if test="ownerId !=null">
+            AND b.owner_id =#{ownerId}
+        </if>
+        <if test="roomId !=null">
+            and REGEXP_LIKE(
+            b.room_number,
+            '(^|,)' + #{roomId} + '($|,)')
+        </if>
+
+    </select>
+
+    <select id="ownerFinanceList" resultType="cn.sdqingyun.smartpark.module.bus.controller.admin.contract.vo.OwnerFinanceListVO">
+        SELECT
+        a.id as "id",
+        a.order_number as "orderNumber",
+        DATE_FORMAT( a.pay_date, '%Y-%m-%d' ) AS "payDate",
+        DATE_FORMAT( a.pay_date, '%Y-%m' ) AS "payDateStr",
+        a.fee_type as "feeType",
+        a.bill_status as "billStatus",
+        a.receivable_payment as "receivablePayment",
+        ( a.receivable + a.late_fee ) AS "receivable"
+        FROM
+        contract_order_bill a
+        LEFT JOIN contract b ON b.id = a.contract_id
+        <where>
+            <if test="param.year !=null and param.year !=''">
+               AND DATE_FORMAT( a.pay_date, '%Y' )=#{param.year}
+            </if>
+            <if test="param.month !=null and param.month !=''">
+                AND DATE_FORMAT( a.pay_date, '%m' )=#{param.month}
+            </if>
+            <if test="param.ownerId !=null">
+                AND b.owner_id = #{param.ownerId}
+            </if>
+            <if test="param.roomId !=null">
+                AND REGEXP_LIKE (
+                b.room_number,
+                '(^|,)'+#{param.roomId}+'($|,)'
+                )
+            </if>
+        </where>
+
+
+    </select>
+
+
+    <select id="getAccountsReceivableReportList" resultType="cn.sdqingyun.smartpark.module.bus.controller.admin.contract.vo.AccountsReceivableReportVO">
+        SELECT
+        e.id AS "billId",
+        b.id as "ownerId",
+        b.`name` AS "ownerName",
+        b.is_personal as "isPersonal",
+        c.`name` AS "ownerContactName",
+        c.phone AS "phone",
+        d.`build_name` AS "buildName",
+        a.room_number AS "roomNumber",
+        a.id as "contractId",
+        DATE_FORMAT(e.pay_start_date,'%Y-%m-%d') AS "payStartDate",
+        DATE_FORMAT(e.pay_end_date,'%Y-%m-%d') AS "payEndDate",
+        f.`name` AS "costTypeName",
+        f.id as "costType",
+        ( e.receivable + e.late_fee ) AS "receivable",
+        DATE_FORMAT(e.pay_date,'%Y-%m-%d') AS "payDate",
+        e.late_fee AS "lateFee",
+        e.receivable_payment AS "receivablePayment",
+        e.bill_status AS "billStatus",
+        g.remit_type AS "remitType",
+        e.clause_type as "clauseType",
+        g.stream_source as "streamSource"
+        FROM
+        contract a
+        LEFT JOIN `owner` b ON a.owner_id = b.id
+        LEFT JOIN owner_contacts c ON c.id = b.contact_id
+        LEFT JOIN village_build d ON d.id = a.build_id
+        LEFT JOIN contract_order_bill e ON e.contract_id = a.id
+        LEFT JOIN org_bill_cost_type f ON f.id = e.fee_type
+        LEFT JOIN org_bill_stream g ON g.bill_id = e.id
+        WHERE
+        a.`status` != '0' and e.bill_type=#{param.billType} and a.tenant_id=#{param.tenantId}
+        <if test="param.roomNumberList !=null and param.roomNumberList.size()>0">
+            and
+            <foreach collection="param.roomNumberList" item="roomNumber" open="(" separator="OR" close=")">
+                REGEXP_LIKE(a.room_number, '(^|,)' + #{roomNumber} +  '($|,)')
+            </foreach>
+        </if>
+        <if test="param.method!=null and param.method !=''">
+            <if test="param.method=='start_date'">
+                and DATE_FORMAT(e.pay_start_date,'%Y-%m')=#{param.payDate}
+            </if>
+            <if test="param.method=='receivable_payment_date'">
+                and DATE_FORMAT(e.pay_date,'%Y-%m')=#{param.payDate}
+            </if>
+        </if>
+        <if test="param.ownerName !=null and param.ownerName !=''">
+            and b.`name` like CONCAT('%',#{param.ownerName},'%')
+        </if>
+        <if test="param.phone !=null and param.phone !=''">
+            and c.phone like CONCAT('%',#{param.phone},'%')
+        </if>
+        <if test="param.costType !=null and param.costType !=''">
+            and f.id=#{param.costType}
+        </if>
+        <if test="param.isLateFee !=null and param.isLateFee !=''">
+            <if test="param.isLateFee==0">
+                and e.late_fee &lt;=0
+            </if>
+            <if test="param.isLateFee==1">
+                and e.late_fee>0
+            </if>
+        </if>
+        <if test="param.buildName !=null and param.buildName !=''">
+            and a.build_id=#{param.buildName}
+        </if>
+        <if test="param.remitType !=null and param.remitType !=''">
+            and g.remit_type=#{param.remitType}
+        </if>
+        <if test="param.billStatus !=null and param.billStatus !=''">
+            and e.bill_status=#{param.billStatus}
+        </if>
+        order by a.create_time desc
+    </select>
+
+
+
+
+    <select id="getByBillTypeContractIdBillInfoList" resultType="cn.sdqingyun.smartpark.module.bus.controller.admin.contract.vo.BillTypeContractIdBillVO">
+        SELECT a.id as "billId",
+        (a.receivable + a.late_fee) AS "receivable",
+        a.receivable_payment AS "receivablePayment",
+        a.late_fee as "lateFee",
+        ((a.receivable + a.late_fee) - a.receivable_payment) AS "collectedAmount",
+        DATE_FORMAT(a.pay_start_date, '%Y-%m-%d') AS "payStartDate",
+        DATE_FORMAT(a.pay_end_date, '%Y-%m-%d') AS "payEndDate",
+        DATE_FORMAT(a.pay_date, '%Y-%m-%d') AS "payDate"
+        FROM contract_order_bill a
+        LEFT JOIN org_bill_cost_type b ON a.fee_type = b.id
+        WHERE a.bill_type = #{billType}
+        AND b.is_bond = #{isBond}
+        AND a.contract_id = #{contractId}
+        <if test="startPayDate !=null and startPayDate !='' and endPayDate !=null and endPayDate !=''">
+            AND DATE_FORMAT(a.pay_date, '%Y-%m-%d') BETWEEN #{startPayDate} AND #{endPayDate}
+        </if>
+        order by a.pay_date asc
+    </select>
+
+    <select id="getReceivableTotalMoney" resultType="java.math.BigDecimal">
+        SELECT IFNULL(SUM((a.receivable + a.late_fee)),"0") AS "receivable"
+        FROM contract_order_bill a
+                 LEFT JOIN contract b ON a.contract_id = b.id
+        WHERE a.contract_id = #{contractId}
+          AND a.bill_type = #{billType}
+    </select>
+
+    <select id="getReceivablePaymentTotalMoney"  resultType="java.math.BigDecimal">
+        SELECT IFNULL(SUM(a.receivable_payment), "0") AS "receivablePayment"
+        FROM contract_order_bill a
+                 LEFT JOIN contract b ON a.contract_id = b.id
+        WHERE a.contract_id = #{contractId}
+          AND a.bill_type = #{billType}
+    </select>
+
+    <delete id="deleteByContractId">
+        delete from contract_order_bill where contract_id = #{contractId}
+    </delete>
+</mapper>

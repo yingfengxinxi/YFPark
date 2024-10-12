@@ -1,0 +1,3 @@
+cn.sdqingyun.smartpark.framework.mq.redis.config.SmartparkRedisMQProducerAutoConfiguration
+cn.sdqingyun.smartpark.framework.mq.redis.config.SmartparkRedisMQConsumerAutoConfiguration
+cn.sdqingyun.smartpark.framework.mq.rabbitmq.config.SmartparkRabbitMQAutoConfiguration

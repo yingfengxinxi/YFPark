@@ -1,0 +1,6 @@
+cn.sdqingyun.smartpark.framework.apilog.config.SmartparkApiLogAutoConfiguration
+cn.sdqingyun.smartpark.framework.jackson.config.SmartparkJacksonAutoConfiguration
+cn.sdqingyun.smartpark.framework.swagger.config.SmartparkSwaggerAutoConfiguration
+cn.sdqingyun.smartpark.framework.web.config.SmartparkWebAutoConfiguration
+cn.sdqingyun.smartpark.framework.apilog.config.SmartparkApiLogRpcAutoConfiguration
+cn.sdqingyun.smartpark.framework.banner.config.SmartparkBannerAutoConfiguration

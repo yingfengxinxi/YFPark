@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>smartpark</artifactId>
+        <groupId>cn.sdqingyun.cloud</groupId>
+        <version>${revision}</version>
+    </parent>
+    <packaging>pom</packaging>
+    <modules>
+        <module>smartpark-common</module>
+        <module>smartpark-spring-boot-starter-env</module>
+        <module>smartpark-spring-boot-starter-mybatis</module>
+        <module>smartpark-spring-boot-starter-redis</module>
+        <module>smartpark-spring-boot-starter-web</module>
+        <module>smartpark-spring-boot-starter-security</module>
+        <module>smartpark-spring-boot-starter-websocket</module>
+
+        <module>smartpark-spring-boot-starter-monitor</module>
+        <module>smartpark-spring-boot-starter-protection</module>
+<!--        <module>smartpark-spring-boot-starter-config</module>-->
+        <module>smartpark-spring-boot-starter-job</module>
+        <module>smartpark-spring-boot-starter-mq</module>
+        <module>smartpark-spring-boot-starter-rpc</module>
+
+        <module>smartpark-spring-boot-starter-excel</module>
+        <module>smartpark-spring-boot-starter-test</module>
+
+        <module>smartpark-spring-boot-starter-biz-tenant</module>
+        <module>smartpark-spring-boot-starter-biz-data-permission</module>
+        <module>smartpark-spring-boot-starter-biz-ip</module>
+        <module>smartpark-spring-boot-starter-esign</module>
+    </modules>
+
+    <artifactId>smartpark-framework</artifactId>
+    <description>
+        该包是技术组件，每个子包，代表一个组件。每个组件包括两部分：
+            1. core 包：是该组件的核心封装
+            2. config 包：是该组件基于 Spring 的配置
+
+        技术组件，也分成两类：
+            1. 框架组件：和我们熟悉的 MyBatis、Redis 等等的拓展
+            2. 业务组件：和业务相关的组件的封装，例如说数据字典、操作日志等等。
+        如果是业务组件，Maven 名字会包含 biz
+    </description>
+
+</project>

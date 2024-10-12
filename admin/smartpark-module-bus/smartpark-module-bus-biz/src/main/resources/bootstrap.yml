@@ -1,0 +1,43 @@
+spring:
+  application:
+    name: bus-server
+  main:
+    # 允许循环依赖，因为项目是三层架构，无法避免这个情况。
+    allow-circular-references: true
+    # 允许 Bean 覆盖，例如说 Feign 等会存在重复定义的服务
+    allow-bean-definition-overriding: true
+  profiles:
+    active: dev
+
+server:
+  port: 48090
+
+--- #################### 注册中心相关配置 ####################
+
+spring:
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      discovery:
+        namespace: public # 命名空间。这里使用 dev 开发环境
+        metadata:
+          version: 1.0.0 # 服务实例的版本号，可用于灰度发布
+
+--- #################### 配置中心相关配置 ####################
+
+spring:
+  cloud:
+    nacos:
+      # Nacos Config 配置项，对应 NacosConfigProperties 配置属性类
+      config:
+        server-addr: ${spring.cloud.nacos.server-addr} # Nacos 服务器地址
+        namespace: ${spring.cloud.nacos.discovery.namespace} # 命名空间 dev 的ID，不能直接使用 dev 名称。创建命名空间的时候需要指定ID为 dev，这里使用 dev 开发环境
+        group: DEFAULT_GROUP # 使用的 Nacos 配置分组，默认为 DEFAULT_GROUP
+        name: ${spring.application.name} # 使用的 Nacos 配置集的 dataId，默认为 spring.application.name
+        file-extension: yml # 使用的 Nacos 配置集的 dataId 的文件拓展名，同时也是 Nacos 配置集的配置格式，默认为 properties
+
+
+# 日志文件配置。注意，如果 logging.file.name 不放在 bootstrap.yml 配置文件，而是放在 application.yaml 中，会导致出现 LOG_FILE_IS_UNDEFINED 文件
+logging:
+  file:
+    name: ${user.home}/logs/${spring.application.name}.log # 日志文件名，全路径

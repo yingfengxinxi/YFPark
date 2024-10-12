@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sdqingyun.smartpark.module.bus.dal.mysql.contract.ContractMapper">
+
+    <!--
+        一般情况下，尽可能使用 Mapper 进行 CRUD 增删改查即可。
+        无法满足的场景，例如说多表关联查询，才使用 XML 编写 SQL。
+        代码生成器暂时只生成 Mapper XML 文件本身，更多推荐 MybatisX 快速开发插件来生成查询。
+        智慧园区
+     -->
+
+    <delete id="deleteByIdContract">
+        delete
+        from contract
+        where id = #{id}
+    </delete>
+
+    <select id="getListPage" resultType="cn.sdqingyun.smartpark.module.bus.dal.dataobject.contract.ContractDO">
+        select
+        id as "id",
+        org_id as "orgId",
+        park_id as "parkId",
+        build_id as "buildId",
+        owner_id as "ownerId",
+        industry as "industry",
+        status as "status",
+        legal_person as "legalPerson",
+        signed_name as "signedName",
+        followup_uid as "followupUid",
+        template_id as "templateId",
+        contract_number as "contractNumber",
+        operator_id as "operatorId",
+        signing_date as "signingDate",
+        unit_price_point as "unitPricePoint",
+        calculation_accuracy as "calculationAccuracy",
+        calculation_order as "calculationOrder",
+        is_receivable_integer as "isReceivableInteger",
+        starting_late_fee_day as "startingLateFeeDay",
+        late_fee_ratio as "lateFeeRatio",
+        upper_limit_late_fee as "upperLimitLateFee",
+        build_name as "buildName",
+        room_number as "roomNumber",
+        lease_square as "leaseSquare",
+        contract_start_time as "contractStartTime",
+        contract_end_time as "contractEndTime",
+        lease_retreat_time as "leaseRetreatTime",
+        followup_uname as "followupUname",
+        lease_unit_price as "leaseUnitPrice",
+        property_unit_price as "propertyUnitPrice",
+        lease_unit_realprice as "leaseUnitRealprice",
+        property_unit_realprice as "propertyUnitRealprice",
+        lease_price as "leasePrice",
+        scene as "scene",
+        clause as "clause",
+        creator as "creator",
+        create_time as "createTime",
+        updater as "updater",
+        update_time as "updateTime",
+        deleted as "deleted",
+        tenant_id as "tenantId",
+        is_whether_lease as "isWhetherLease",
+        pdf_file_url as "pdfFileUrl",
+        lease_area as "leaseArea",
+        data_source as "dataSource",
+        checked_build as "checkedBuild",
+        is_bill_overdue as "isBillOverdue"
+
+        from contract
+        where deleted="0"
+        <if test="param.contractNumber !=null and param.contractNumber !=''">
+            AND contract_number like CONCAT(#{param.contractNumber})
+        </if>
+        <if test="param.startSigningDate !=null and param.startSigningDate !=''">
+            AND DATE_FORMAT(signing_date,'%Y-%m-%d') between DATE_FORMAT(#{param.startSigningDate},'%Y-%m-%d') and
+            DATE_FORMAT(#{param.endSigningDate},'%Y-%m-%d')
+        </if>
+        <if test="param.startContractStartTime !=null and param.startContractStartTime !=''">
+            AND DATE_FORMAT(contract_start_time,'%Y-%m-%d') between
+            DATE_FORMAT(#{param.startContractStartTime},'%Y-%m-%d') and
+            DATE_FORMAT(#{param.endContractStartTime},'%Y-%m-%d')
+        </if>
+        <if test="param.startContractEndTime !=null and param.startContractEndTime !=''">
+            AND DATE_FORMAT(contract_end_time,'%Y-%m-%d') between DATE_FORMAT(#{param.startContractEndTime},'%Y-%m-%d')
+            and DATE_FORMAT(#{param.endContractEndTime},'%Y-%m-%d')
+        </if>
+        <if test="param.startLeaseRetreatTime !=null and param.startLeaseRetreatTime !=''">
+            AND DATE_FORMAT(lease_retreat_time,'%Y-%m-%d') between
+            DATE_FORMAT(#{param.startLeaseRetreatTime},'%Y-%m-%d') and
+            DATE_FORMAT(#{param.endLeaseRetreatTime},'%Y-%m-%d')
+        </if>
+        <if test="param.startCreateTime !=null and param.startCreateTime !=''">
+            AND DATE_FORMAT(create_time,'%Y-%m-%d') between DATE_FORMAT(#{param.startCreateTime},'%Y-%m-%d') and
+            DATE_FORMAT(#{param.endCreateTime},'%Y-%m-%d')
+        </if>
+        <if test="param.isWhetherLease !=null and param.isWhetherLease !=''">
+            AND is_whether_lease=#{param.isWhetherLease}
+        </if>
+        <if test="param.operatorId !=null">
+            AND operator_id=#{param.operatorId}
+        </if>
+        <if test="param.creator !=null and param.creator !=''">
+            AND creator=#{param.creator}
+        </if>
+        <if test="param.statuss !=null and param.statuss!=''">
+            AND status in
+            <foreach collection="param.statuss.split(',')" item="status" open="(" separator="," close=")">
+                #{status}
+            </foreach>
+        </if>
+        <if test="param.parkIds !=null and param.parkIds!=''">
+            AND park_id in
+            <foreach collection="param.parkIds.split(',')" item="parkId" open="(" separator="," close=")">
+                #{parkId}
+            </foreach>
+        </if>
+        <if test="param.buildIds !=null and param.buildIds!=null">
+            AND build_id in
+            <foreach collection="param.buildIds.split(',')" item="buildId" open="(" separator="," close=")">
+                #{buildId}
+            </foreach>
+        </if>
+        <if test="param.ownerId !=null">
+            AND owner_id=#{param.ownerId}
+        </if>
+        <if test="param.roomNumber !=null and param.roomNumber !=''">
+            AND REGEXP_LIKE(room_number, '(^|,)'+#{param.roomNumber}+'($|,)')
+        </if>
+        order by create_time desc
+
+    </select>
+    <select id="getOwnerNameContractList"
+            resultType="cn.sdqingyun.smartpark.module.bus.controller.admin.contract.vo.OwnerNameContractVO">
+        SELECT a.id              as "contractId",
+               a.contract_number as "contractNumber",
+               b.id              as "ownerId",
+               b.name            as "ownerName",
+               a.checked_build   as "checkedBuild"
+        FROM contract a
+                 INNER JOIN `owner` b on b.id = a.owner_id
+        WHERE a.deleted = "0"
+          and a.`status`!='0'
+	and b.`name` like CONCAT('%',#{ownerName}
+            , '%')
+    </select>
+</mapper>

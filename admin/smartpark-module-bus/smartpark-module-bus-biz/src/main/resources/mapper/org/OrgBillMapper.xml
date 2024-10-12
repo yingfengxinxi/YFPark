@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sdqingyun.smartpark.module.bus.dal.mysql.org.OrgBillMapper">
+
+    <!--
+        一般情况下，尽可能使用 Mapper 进行 CRUD 增删改查即可。
+        无法满足的场景，例如说多表关联查询，才使用 XML 编写 SQL。
+        代码生成器暂时只生成 Mapper XML 文件本身，更多推荐 MybatisX 快速开发插件来生成查询。
+        智慧园区
+     -->
+
+    <select id="getBillCollectionAllListPage"
+            resultType="cn.sdqingyun.smartpark.module.bus.controller.admin.org.vo.BillCollectionAllListVO">
+        SELECT
+        a.id as "billId",
+        d.`name` as "ownerName",
+        d.id as "ownerId",
+        c.build_name as "buildName",
+        c.id as "buildId",
+        b.contract_number as "contractNumber",
+        a.bill_status as "billStatus",
+        h.`name`as "feeTypeName",
+        b.lease_area as "leaseArea",
+        a.bill_source as "billSource",
+        a.bill_type as "billType",
+        IFNULL(a.late_fee,'0') as "lateFee",
+        ( a.receivable + a.late_fee ) AS "receivable",
+        a.receivable_payment as "receivablePayment",
+        a.tax_amount as "taxAmount",
+        a.pay_start_date as "payStartDate",
+        a.pay_end_date as "payEndDate",
+        a.pay_date as "payDate",
+        IFNULL(SUM( e.adjust_price ),'0') AS "jiaAdjustPrice",
+        IFNULL(SUM( f.adjust_price ),'0') AS "jianAdjustPrice",
+        (SELECT count(1) from org_bill_notice bn where bn.build_id=a.id) as "noticeCount"
+        FROM
+        contract_order_bill a
+        LEFT JOIN contract b ON b.id = a.contract_id
+        LEFT JOIN village_build c ON c.id = b.build_id
+        LEFT JOIN `owner` d ON d.id = b.owner_id
+        LEFT JOIN org_bill_adjust e ON e.bill_id = a.id
+        AND e.adjust_type = '1' and e.adjust_status in ('2','3')
+        LEFT JOIN org_bill_adjust f ON f.bill_id = a.id
+        AND f.adjust_type = '2' and f.adjust_status in ('2','3')
+        LEFT JOIN org_bill_invoice g on g.build_id=a.id
+        LEFT JOIN org_bill_cost_type h on h.id=a.fee_type
+        WHERE
+        b.`status` != '0'
+        AND a.bill_type = #{param.billType}
+        <if test="param.contractNumber !=null and param.contractNumber!=''">
+            and b.contract_number LIKE CONCAT('%',#{param.contractNumber},'%')
+        </if>
+        <if test="param.startPayDate !=null and param.startPayDate!=''">
+            and DATE_FORMAT(a.pay_date,'%Y-%m-%d') BETWEEN #{param.startPayDate} and #{param.endPayDate}
+        </if>
+        <if test="param.payDate !=null">
+            and DATE_FORMAT(a.pay_date,'%Y-%m-%d') &lt;=#{param.payDate}
+        </if>
+        <if test="param.billStatusList !=null and param.billStatusList.size()>0">
+            AND a.bill_status in
+            <foreach collection="param.billStatusList" item="billStatus" open="(" separator="," close=")">
+                #{billStatus}
+            </foreach>
+        </if>
+        <if test="param.contractStatusList!=null and param.contractStatusList.size()>0">
+            AND b.`status` in
+            <foreach collection="param.contractStatusList" item="contractStatus" open="(" separator="," close=")">
+                #{contractStatus}
+            </foreach>
+        </if>
+        <if test="param.billSource !=null and param.billSource!='' ">
+            AND a.bill_source=#{param.billSource}
+        </if>
+        <if test="param.feeType !=null and param.feeType !=''">
+            AND a.fee_type=#{param.feeType}
+        </if>
+        <if test="param.startCreateTime !=null and param.startCreateTime!=''">
+            AND DATE_FORMAT(a.create_time,'%Y-%m-%d') BETWEEN #{param.startCreateTime} and #{param.endCreateTime}
+        </if>
+        <if test="param.invoiceStatusList !=null and param.invoiceStatusList.size()>0">
+            AND g.invoice_status in
+            <foreach collection="param.invoiceStatusList" item="invoiceStatus" open="(" separator="," close=")">
+                #{invoiceStatus}
+            </foreach>
+        </if>
+        <if test="param.parkIdList!=null and param.parkIdList.size()>0">
+            AND b.park_id in
+            <foreach collection="param.parkIdList" item="parkId" open="(" separator="," close=")">
+                #{parkId}
+            </foreach>
+        </if>
+        <if test="param.buildIdList !=null and param.buildIdList.size()>0">
+            AND b.build_id in
+            <foreach collection="param.buildIdList" item="buildId" open="(" separator="," close=")">
+                #{buildId}
+            </foreach>
+        </if>
+        GROUP BY
+        a.id
+        ORDER BY a.create_time desc
+    </select>
+
+
+
+    <select id="getBillBeOverdueListPage"
+            resultType="cn.sdqingyun.smartpark.module.bus.controller.admin.org.vo.BillCollectionAllListVO">
+        SELECT
+        a.id as "billId",
+        d.`name` as "ownerName",
+        d.is_personal as "isPersonal",
+        d.id as "ownerId",
+        a.contract_id as "contractId",
+        c.build_name as "buildName",
+        b.contract_number as "contractNumber",
+        a.bill_status as "billStatus",
+        h.`name`as "feeTypeName",
+        b.lease_area as "leaseArea",
+        a.bill_source as "billSource",
+        a.bill_type as "billType",
+        IFNULL(a.late_fee,'0') as "lateFee",
+        ( a.receivable + a.late_fee ) AS "receivable",
+        a.receivable_payment as "receivablePayment",
+        a.tax_amount as "taxAmount",
+        a.pay_start_date as "payStartDate",
+        a.pay_end_date as "payEndDate",
+        a.pay_date as "payDate",
+        IFNULL(SUM( e.adjust_price ),'0') AS "jiaAdjustPrice",
+        IFNULL(SUM( f.adjust_price ),'0') AS "jianAdjustPrice",
+        (SELECT count(1) from org_bill_notice bn where bn.build_id=a.id) as "noticeCount"
+        FROM
+        contract_order_bill a
+        LEFT JOIN contract b ON b.id = a.contract_id
+        LEFT JOIN village_build c ON c.id = b.build_id
+        LEFT JOIN `owner` d ON d.id = b.owner_id
+        LEFT JOIN org_bill_adjust e ON e.bill_id = a.id
+        AND e.adjust_type = '1'
+        LEFT JOIN org_bill_adjust f ON f.bill_id = a.id
+        AND f.adjust_type = '2'
+        LEFT JOIN org_bill_invoice g on g.build_id=a.id
+        LEFT JOIN org_bill_cost_type h on h.id=a.fee_type
+        WHERE
+        b.`status` != '0'
+        AND a.bill_status='2'
+        AND a.bill_type = #{param.billType}
+        <if test="param.startPayDate !=null and param.startPayDate!=''">
+            and DATE_FORMAT(a.pay_date,'%Y-%m-%d') BETWEEN #{param.startPayDate} and #{param.endPayDate}
+        </if>
+        <if test="param.ownerName !=null and param.ownerName !=''">
+            and d.`name` like CONCAT('%',#{param.ownerName},'%')
+        </if>
+
+        <if test="param.billSource !=null and param.billSource!='' ">
+            AND a.bill_source=#{param.billSource}
+        </if>
+        <if test="param.feeType !=null and param.feeType !=''">
+            AND a.fee_type=#{param.feeType}
+        </if>
+        <if test="param.startCreateTime !=null and param.startCreateTime!=''">
+            AND DATE_FORMAT(a.create_time,'%Y-%m-%d') BETWEEN #{param.startCreateTime} and #{param.endCreateTime}
+        </if>
+
+        <if test="param.parkIdList!=null and param.parkIdList.size()>0">
+            AND b.park_id in
+            <foreach collection="param.parkIdList" item="parkId" open="(" separator="," close=")">
+                #{parkId}
+            </foreach>
+        </if>
+        <if test="param.buildIdList !=null and param.buildIdList.size()>0">
+            AND b.build_id in
+            <foreach collection="param.buildIdList" item="buildId" open="(" separator="," close=")">
+                #{buildId}
+            </foreach>
+        </if>
+        GROUP BY
+        a.id
+        ORDER BY b.create_time desc
+    </select>
+</mapper>

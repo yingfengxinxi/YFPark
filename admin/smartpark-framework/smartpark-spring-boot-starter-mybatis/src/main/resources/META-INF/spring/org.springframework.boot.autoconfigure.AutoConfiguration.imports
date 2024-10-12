@@ -1,0 +1,3 @@
+cn.sdqingyun.smartpark.framework.datasource.config.SmartparkDataSourceAutoConfiguration
+cn.sdqingyun.smartpark.framework.mybatis.config.SmartparkMybatisAutoConfiguration
+cn.sdqingyun.smartpark.framework.translate.config.SmartparkTranslateAutoConfiguration

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.sdqingyun.smartpark.module.bus.dal.mysql.energy.EnergyMapper">
+
+    <!--
+        一般情况下，尽可能使用 Mapper 进行 CRUD 增删改查即可。
+        无法满足的场景，例如说多表关联查询，才使用 XML 编写 SQL。
+        代码生成器暂时只生成 Mapper XML 文件本身，更多推荐 MybatisX 快速开发插件来生成查询。
+        智慧园区
+     -->
+    <select id="getEnergyListPage"
+            resultType="cn.sdqingyun.smartpark.module.bus.controller.admin.energy.vo.EnergyListPageVO">
+        SELECT
+        a.id AS "energyRecordId",
+        b.id AS "energyId",
+        b.`name` AS "name",
+        b.number AS "number",
+        b.type AS "type",
+        b.purpose as "purpose",
+        b.village_id AS "villageId",
+        b.build_id AS "buildId",
+        b.room_ids AS "roomIds",
+        b.payment_type AS "paymentType",
+        b.current_remaining AS "currentRemaining",
+        a.this_time AS "thisTime",
+        a.this_number AS "thisNumber",
+        a.last_number AS "lastNumber",
+        a.this_use AS "thisUse",
+        a.lead_uid AS "leadUid",
+        IFNULL( c.`name`, '未绑定' ) AS "propertyName",
+        b.`status` AS "statuss"
+        FROM energy b
+        LEFT JOIN energy_record a ON a.energy_id = b.id
+        LEFT JOIN property c ON c.id = b.property_id
+        <where>
+            <if test="param.villageId!=null ">
+                AND b.village_id=#{param.villageId}
+            </if>
+            <if test="param.buildId!=null ">
+                AND b.build_id=#{param.buildId}
+            </if>
+            <if test="param.purpose!=null and param.purpose!=''">
+                AND b.purpose=#{param.purpose}
+            </if>
+            <if test="param.name!=null and param.name">
+                AND b.name like CONCAT('%',#{param.name},'%')
+            </if>
+            <if test="param.number!=null and param.number">
+                AND b.number like CONCAT('%',#{param.number},'%')
+            </if>
+
+            <if test="param.type!=null">
+                AND b.type=#{param.type}
+            </if>
+            <if test="param.statuss!=null and param.statuss">
+                AND b.status in
+                <foreach collection="param.statuss.split(',')" item="status" open="(" separator="," close=")">
+                    #{status}
+                </foreach>
+            </if>
+            order by b.create_time desc
+        </where>
+    </select>
+</mapper>
