@@ -1,0 +1,299 @@
+<template>
+  <ElDrawer :title="dialogTitle" v-model="dialogVisible" size="60%">
+    <el-form
+      ref="formRef"
+      :model="formData"
+      :rules="formRules"
+      label-width="100px"
+      v-loading="formLoading"
+      label-position="top"
+      :disabled="formType == 'detail'"
+    >
+      <el-row :gutter="20">
+        <el-col :span="8">
+          <el-form-item label="单据编号">
+            <el-input
+              placeholder="编码自动生成"
+              v-model="formData.processNumber"
+              disabled
+            /> </el-form-item
+        ></el-col>
+        <el-col :span="8">
+          <el-form-item label="处置发起人" prop="cuserUid">
+            <el-select v-model="formData.cuserUid" placeholder="请选择发起人" disabled>
+              <el-option
+                v-for="item in userOptions"
+                :key="item.id"
+                :label="item.nickname"
+                :value="item.id"
+              />
+            </el-select> </el-form-item
+        ></el-col>
+        <el-col :span="8">
+          <el-form-item label="发起部门" prop="departmentId">
+            <el-tree-select
+              v-model="formData.departmentId"
+              :data="deptTree"
+              :props="defaultProps"
+              filterable
+              check-strictly
+              default-expand-all
+              node-key="id"
+              placeholder="请选择发起部门"
+            /> </el-form-item
+        ></el-col>
+        <el-col :span="8">
+          <el-form-item label="发起时间" prop="applyTime">
+            <el-date-picker
+              v-model="formData.applyTime"
+              type="date"
+              value-format="x"
+              placeholder="选择发起时间"
+              class="!w-1/1"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="处置金额" prop="handleAmount">
+            <el-input-number
+              controls-position="right"
+              min="0"
+              placeholder="请输入"
+              v-model="formData.handleAmount"
+              class="!w-1/1"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="处置费用" prop="handleExpenses">
+            <el-input-number
+              controls-position="right"
+              min="0"
+              placeholder="请输入"
+              v-model="formData.handleExpenses"
+              class="!w-1/1"
+            />
+          </el-form-item>
+        </el-col>
+        <el-col :span="8">
+          <el-form-item label="处置类型" prop="handleType">
+            <el-select v-model="formData.handleType" placeholder="" clearable>
+              <el-option
+                v-for="dict in getIntDictOptions(DICT_TYPE.DISPOSEEOF_TYPE)"
+                :key="dict.value"
+                :label="dict.label"
+                :value="dict.value"
+              />
+            </el-select>
+          </el-form-item>
+        </el-col>
+        <el-col :span="24">
+          <el-form-item label="处置原因" prop="remark">
+            <el-input
+              placeholder="请输入"
+              v-model="formData.remark"
+              type="textarea"
+              rows="4"
+              class="!w-1/1"
+            />
+          </el-form-item>
+        </el-col>
+      </el-row>
+      <ContentWrap title="资产列表" class="!mt-4">
+        <template #header v-if="showAdd">
+          <div class="flex-1 flex justify-end items-center">
+            <el-button type="primary" @click="addAssets()">
+              <Icon icon="ep:plus" class="m-r-6px" />
+              添加资产
+            </el-button>
+          </div>
+        </template>
+        <el-table
+          :data="assetsList"
+          v-loading="loading"
+          border
+          :header-cell-style="{
+            color: '#000000d9',
+            fontSize: '14px',
+            fontWeight: '500',
+            backgroundColor: '#fafafa'
+          }"
+        >
+          <el-table-column label="资产编码" prop="propertyNumber" />
+          <el-table-column label="资产分类" prop="categoryName" />
+          <el-table-column label="资产名称" prop="name" />
+          <el-table-column label="所在位置" prop="positionName" />
+          <el-table-column label="品牌" prop="brand" />
+          <el-table-column label="型号" prop="modelName" />
+          <el-table-column label="操作" width="100" fixed="right" v-if="formType != 'detail'">
+            <template #default="scope">
+              <el-button text type="primary" @click="deleteAssetsItem(scope.row, scope.$index)"
+                >移除</el-button
+              >
+            </template>
+          </el-table-column>
+        </el-table>
+        <Pagination
+          v-if="formType == 'detail'"
+          :total="total"
+          v-model:page="queryParams.pageNo"
+          v-model:limit="queryParams.pageSize"
+          @pagination="getList"
+        />
+      </ContentWrap>
+      <StatusArrayList ref="listRef" @success="submitListForm" />
+    </el-form>
+    <template #footer v-if="formType != 'detail'">
+      <el-button @click="submitForm" type="primary" :disabled="formLoading">确 定</el-button>
+      <el-button @click="dialogVisible = false">取 消</el-button>
+    </template>
+  </ElDrawer>
+</template>
+<script setup lang="ts">
+import { formatDate } from '@/utils/formatTime'
+import { defaultProps, handleTree } from '@/utils/tree'
+import * as DeptApi from '@/api/system/dept'
+import * as UserApi from '@/api/system/user'
+import { BuildApi } from '@/api/bus/village'
+import { ElDrawer } from 'element-plus'
+import { useUserStore } from '@/store/modules/user'
+import { PropertyApi, PropertyVO } from '@/api/bus/property/property'
+import { DICT_TYPE, getIntDictOptions, getDictLabel } from '@/utils/dict'
+import StatusArrayList from './statusArrayList.vue'
+
+/** 处置 表单 */
+defineOptions({ name: 'LendReturn' })
+
+const { t } = useI18n() // 国际化
+const message = useMessage() // 消息弹窗
+
+const deptTree = ref() // 部门树形结构
+const userOptions = ref<UserApi.UserVO[]>([]) // 用户列表
+const dialogVisible = ref(false) // 弹窗的是否展示
+const dialogTitle = ref('资产处置') // 弹窗的标题
+const formLoading = ref(false) // 表单的加载中：1）修改时的数据加载；2）提交的按钮禁用
+const formType = ref('') // 表单的类型：create - 新增；update - 修改
+const showAdd = ref(false)
+const formData = ref({
+  processNumber: undefined,
+  id: undefined,
+  handleExpenses: undefined,
+  handleAmount: undefined,
+  handleType: undefined,
+  cuserUid: undefined,
+  departmentId: undefined,
+  applyTime: undefined,
+  remark: undefined
+})
+const roomName = ref()
+const formRules = reactive({
+  cuserUid: [{ required: true, message: '处置发起人不能为空', trigger: 'blur' }],
+  departmentId: [{ required: true, message: '发起部门不能为空', trigger: 'blur' }],
+  applyTime: [{ required: true, message: '发起时间不能为空', trigger: 'blur' }],
+  handleExpenses: [{ required: true, message: '处置费用不能为空', trigger: 'blur' }],
+  handleAmount: [{ required: true, message: '处置金额不能为空', trigger: 'blur' }],
+  handleType: [{ required: true, message: '处置类型不能为空', trigger: 'blur' }]
+})
+const formRef = ref() // 表单 Ref
+const treeLoading = ref(false)
+const userStore = useUserStore()
+const villageTypeValue = computed(() => userStore.getvillageType)
+const deptList = ref([])
+const idArr = ref<number[]>([])
+const assetsList = ref([])
+const queryParams = reactive({
+  pageNo: 1,
+  pageSize: 10,
+  approveNumber: undefined
+})
+const total = ref(0)
+const loading = ref(false)
+/** 打开弹窗 */
+const open = async (show?: number, type?: any, listArray?: any, row?: any, handleType?: any) => {
+  showAdd.value = show == 1 ? true : false
+  formType.value = type
+  console.log(listArray)
+  assetsList.value = listArray
+  // 获得部门树
+  deptTree.value = handleTree(await DeptApi.getSimpleDeptList())
+  // 获得用户列表
+  userOptions.value = await UserApi.getSimpleUserList()
+  resetForm()
+  if (handleType) formData.value.handleType = handleType
+  formData.value.applyTime = new Date().getTime()
+  formData.value.cuserUid = userStore.getUser.id
+  if (type == 'detail') {
+    formData.value = row
+    queryParams.approveNumber = formData.value.processNumber
+    getList()
+  }
+  dialogVisible.value = true
+}
+defineExpose({ open }) // 提供 open 方法，用于打开弹窗
+const getList = async () => {
+  try {
+    loading.value = true
+    const res = await PropertyApi.getPropertyPageByApprove(queryParams)
+    assetsList.value = res.list
+    total.value = res.total
+  } finally {
+    loading.value = false
+  }
+}
+/** 添加资产 */
+const listRef = ref()
+const addAssets = async () => {
+  listRef.value.open(1, 1)
+}
+
+/** 删除资产 */
+const deleteAssetsItem = (row, index) => {
+  assetsList.value.splice(index, 1)
+}
+
+const submitListForm = async (list) => {
+  assetsList.value = [...new Set(list)]
+}
+
+/** 提交表单 */
+const emit = defineEmits(['success']) // 定义 success 事件，用于操作成功后的回调
+const submitForm = async () => {
+  if (!assetsList.value.length) {
+    message.warning('请先选择资产')
+    return
+  }
+  // 校验表单
+  await formRef.value.validate()
+  // 提交请求
+  formLoading.value = true
+  try {
+    const data = formData.value
+    data.status = 1
+    data.processNumber = assetsList.value.map((item) => item.propertyNumber).join(',')
+    await PropertyApi.createHandleProperty(data)
+    message.success(t('common.operationSuccess'))
+
+    dialogVisible.value = false
+    // 发送操作成功的事件
+    emit('success')
+  } finally {
+    formLoading.value = false
+  }
+}
+
+/** 重置表单 */
+const resetForm = () => {
+  formData.value = {
+    processNumber: undefined,
+    id: undefined,
+    handleExpenses: undefined,
+    handleAmount: undefined,
+    handleType: undefined,
+    cuserUid: undefined,
+    departmentId: undefined,
+    applyTime: undefined,
+    remark: undefined
+  }
+  formRef.value?.resetFields()
+}
+</script>
