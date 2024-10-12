@@ -1,31 +1,36 @@
+<div align="center" >
+    <img src="https://foruda.gitee.com/avatar/1728719990621654075/13695585_qingyun-software_1728719990.png!avatar100" />
+</div>
 
 <div align="center">
 
-
-## 萤丰智慧园区YFPark管理系统
+智慧园区智慧楼宇管理系统Java版本
 
 </div>
 
+<div align="center" >
+    <a href="https://www.sdyingfeng.cn">
+        <img src="https://img.shields.io/badge/Licence-apache2.0-green.svg?style=flat" />
+    </a>
+    <a href="https://www.sdyingfeng.cn">
+        <img src="https://img.shields.io/badge/Edition-5.4-blue.svg" />
+    </a>
+     <a href="https://gitee.com/ZhongBangKeJi/CRMEB/repository/archive/master.zip">
+        <img src="https://img.shields.io/badge/Download-240m-red.svg" />
+    </a>
+</div>
 
 #### 
 
 <div align="center">
 
-[官网](https://www.sdqingyun.cn/) |
-[在线体验(敬请期待)](https://wiki.sdqingyun.cn/) |
+[官网](https://www.sdyingfeng.cn) |
 [帮助文档](https://wiki.sdqingyun.cn/) |
 </div>
 
-
----
-
-### 📋 更新说明
-
-
-点击查看<a href="https://wiki.sdqingyun.cn/" target="_blank">更新记录</a>
-
-
-### 用心做开源，我们也很需要你的鼓励！右上角Star🌟，等你点亮！
+<div align="center">
+    如果对您有帮助，您可以点右上角 "Star" ❤️ 支持一下 谢谢！
+</div>
 
 ---
 
