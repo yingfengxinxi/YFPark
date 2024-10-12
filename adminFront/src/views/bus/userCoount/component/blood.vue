@@ -1,0 +1,86 @@
+<template>
+  <Echart :height="300" :options="echartsOption" />
+</template>
+<script setup lang="ts">
+import { EChartsOption } from 'echarts'
+import echarts from '@/plugins/echarts'
+const props = withDefaults(
+  defineProps<{
+    data: array
+  }>(),
+  {}
+)
+let seriesArr = ref([])
+let XLabel = ref([])
+let echartsOption = ref({})
+watch(
+  () => props.data,
+  async (newVal) => {
+    // let data = [{
+    //   value: 'A型',
+    //   count: 10
+    // },
+    // {
+    //   value: 'B型',
+    //   count: 20
+    // },
+    // {
+    //   value: 'AB型',
+    //   count: 30
+    // },
+    // {
+    //   value: 'O型',
+    //   count: 40
+    // },
+    // {
+    //   value: '特殊血型',
+    //   count: 50
+    // }]
+    let data = newVal
+    await data.map((item, index) => {
+      XLabel.value.push(item.value)
+      let obj = {}
+      obj.name = item.value
+      obj.type = 'bar'
+      obj.barWidth = 18
+      obj.stack = '广告'
+      obj.data = []
+      for (var i = 0; i <= index; i++) {
+        if (i != index) {
+          obj.data.push(0)
+        } else {
+          obj.data.push(item.count)
+        }
+      }
+      seriesArr.value.push(obj)
+    }),
+      (echartsOption.value = {
+        tooltip: {
+          show: false,
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          }
+        },
+        legend: {},
+        grid: {
+          left: '0%',
+          top: '15%',
+          right: '4%',
+          bottom: '3%',
+          containLabel: true
+        },
+        xAxis: {
+          type: 'value',
+          data: XLabel.value
+        },
+        yAxis: {
+          type: 'category',
+          data: XLabel.value
+        },
+        series: seriesArr.value
+      } as EChartsOption)
+  }
+)
+</script>
+<style lang="scss" scoped></style>
