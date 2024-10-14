@@ -25,9 +25,10 @@
 <div align="center">
 
 [官网](https://www.sdyingfeng.cn) |
+[在线演示](http://yuanqu.sdyingfeng.cn/) |
 [帮助文档](https://wiki.sdqingyun.cn/) |
+[[宽屏预览](https://gitee.com/qingyun-software/YFPark//blob/master/README.md)] 
 </div>
-
 <div align="center">
     如果对您有帮助，您可以点右上角 "Star" ❤️ 支持一下 谢谢！
 </div>
@@ -35,7 +36,7 @@
 ---
 
 ### 📝 介绍
-🔥遥遥领先的开源智慧园区智慧楼宇系统，框架采用微服务SpringCloud：JDK 17+ Spring Boot 3.2+MySQL+vue3+vite+uniapp；前后台都支持风格切换，包含小程序、H5、公众号、App，，前后端分离，方便二开，使用文档、接口文档、数据字典、代码生成、二开文档/视频教程，各种资料应有尽有，就算你是技术小白，也能轻松上手！
+🔥遥遥领先的开源智慧园区数字园区智慧楼宇系统，框架采用微服务SpringCloud：JDK 17+ Spring Boot 3.2+MySQL+vue3+vite+uniapp；前后台都支持风格切换，包含小程序、H5、公众号、App，，前后端分离，方便二开，使用文档、接口文档、数据字典、代码生成、二开文档/视频教程，各种资料应有尽有，就算你是技术小白，也能轻松上手！
 欢迎大家来体验、来提建议，来一起让萤丰智慧园区管理系统更强大，让更多开发者受益！
 
 
@@ -62,23 +63,37 @@
 
 ###  📱 系统演示
 
-官网： https://sdqingyun.cn/
+请联系客服获取,客服微信：lhl-bmy-bhw
 
-系统总后台PC端:http://yuanqu.sdqingyun.cn/
+1、官网介绍：https://yq.sdyingfeng.cn/
+
+2、系统总后台PC端:http://yuanqu.sdyingfeng.cn/
+
+```
 
 使用人群: 总管理员/开发人员
 账号: admin   
-密码：联系客服  
+密码：加客服微信索取
 
-用户端h5：http://yuanqu.sdqingyun.cn/h5/?org_id=1   （移动端打开）
+```
+
+3、用户端h5：http://yuanqu.sdyingfeng.cn//h5/?org_id=1   （移动端打开）
+
+```
 
 账号：13395351894  
-密码：联系客服  
+密码：加客服微信索取  
+```
 
-管理端h5：http://yuanqu.sdqingyun.cn/h5_orgs/   （电脑端打开）
+
+4、管理端h5：http://yuanqu.sdyingfeng.cn/h5_orgs/   （电脑端打开）
+
+```
 
 账号：13395351894  
-密码：联系客服
+密码：加客服微信索取
+```
+
 
 
 > 😜 给项目点点 Star 吧，这对我们真的很重要！
@@ -167,13 +182,6 @@ So~~想要用萤丰开源智慧园区系统做公益项目的朋友，可以来�
 赠人玫瑰，手留余香！萤丰智慧园区诚挚地邀请大家积极参与捐赠，我们会将捐赠获得的费用，悉数用于支持公益项目，让善意无限传递下去！
 在此深表感谢~
 
----
-###  📞 萤丰智慧园区互动
-#### 萤丰智慧园区开源技术交流群
-#### 扫码进群可领取接口文档、产品功能清单、高清UI设计图、思维脑图！
-
-![输入图片说明](readme/二维码.png)
----
 
 ###  📺 版权须知
 
@@ -208,9 +216,8 @@ All rights reserved。
 如果您对LingView有任何疑问或需要咨询，欢迎与我们联系：
 
 
+客服微信：lhl-bmy-bhw
+
 吕经理： 13241588504（微信同号）
 
-客服微信_1：candy_7197262
-
-客服微信_2：lhl-bmy-bhw
-
+牛经理：15854827610（微信同号）
