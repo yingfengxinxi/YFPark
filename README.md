@@ -29,6 +29,7 @@
 [帮助文档](https://wiki.sdqingyun.cn/) |
 [[宽屏预览](https://gitee.com/qingyun-software/YFPark//blob/master/README.md)] 
 </div>
+
 <div align="center">
     如果对您有帮助，您可以点右上角 "Star" ❤️ 支持一下 谢谢！
 </div>
@@ -71,26 +72,24 @@
 
 
 ```
-
 使用人群: 总管理员/开发人员
 账号: admin   
 密码：加客服微信索取
-
 ```
 
 3、用户端h5：http://yuanqu.sdyingfeng.cn//h5/?org_id=1   （移动端打开）
 
-```
 
-账号：13395351894  
-密码：加客服微信索取  
 ```
+账号：13395351894  
+密码：加客服微信索取 
+``` 
+
 
 
 4、管理端h5：http://yuanqu.sdyingfeng.cn/h5_orgs/   （电脑端打开）
 
 ```
-
 账号：13395351894  
 密码：加客服微信索取
 ```
