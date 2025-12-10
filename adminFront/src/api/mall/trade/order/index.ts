@@ -95,7 +95,7 @@ export interface OrderItemRespVO {
   orderPartPrice?: number | null //子订单分摊金额（总）
   orderDividePrice?: number | null //分摊后子订单实付金额（总）
   // ========== 营销基本信息 ==========
-  // TODO 芋艿：在捉摸一下
+  // 需要替换 芋艿：在捉摸一下
   // ========== 售后基本信息 ==========
   afterSaleStatus?: number | null // 售后状态
   properties?: ProductPropertiesVO[] //属性数组

@@ -25,7 +25,7 @@ public class PropertyInventoryListRespVO {
     @ExcelProperty("单据编号")
     private String number;
 
-    @Schema(description = "盘点清单名称", example = "芋艿")
+    @Schema(description = "盘点清单名称", example = "智慧园区")
     @ExcelProperty("盘点清单名称")
     private String inventoryName;
 

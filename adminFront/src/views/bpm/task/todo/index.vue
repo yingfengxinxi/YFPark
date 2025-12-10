@@ -1,5 +1,5 @@
 <template>
-  <doc-alert title="审批通过、不通过、驳回" url="https://doc.iocoder.cn/bpm/task-todo-done/" />
+  <doc-alert title="审批通过、不通过、驳回" url="https://doc.iocoder.cn/bpm/task-需要替换-done/" />
   <doc-alert title="审批加签、减签" url="https://doc.iocoder.cn/bpm/sign/" />
   <doc-alert
     title="审批转办、委派、抄送"
@@ -96,7 +96,7 @@
 import { dateFormatter } from '@/utils/formatTime'
 import * as TaskApi from '@/api/bpm/task'
 
-defineOptions({ name: 'BpmTodoTask' })
+defineOptions({ name: 'Bpm需要替换Task' })
 
 const { push } = useRouter() // 路由
 
@@ -115,7 +115,7 @@ const queryFormRef = ref() // 搜索的表单
 const getList = async () => {
   loading.value = true
   try {
-    const data = await TaskApi.getTaskTodoPage(queryParams)
+    const data = await TaskApi.getTask需要替换Page(queryParams)
     list.value = data.list
     total.value = data.total
   } finally {

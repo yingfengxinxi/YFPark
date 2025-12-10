@@ -44,6 +44,7 @@ public class OwnerController {
     @Resource
     private OwnerService Service;
 
+    //租客信息与用户挂挂钩
     @PostMapping("/create")
     @Operation(summary = "创建租客信息")
     @PreAuthorize("@ss.hasPermission('bus:owner:create')")

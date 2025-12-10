@@ -81,7 +81,7 @@
       <el-table-column label="描述" align="center" prop="description" />
       <el-table-column label="业务编号" align="center" prop="bizId" width="150px" />
       <el-table-column label="业务类型" align="center" prop="bizType" width="150px">
-        <!--   TODO 芋艿：此处应创建对应的字典 -->
+        <!--   需要替换 芋艿：此处应创建对应的字典 -->
         <template #default="scope">
           <dict-tag :type="DICT_TYPE.MEMBER_EXPERIENCE_BIZ_TYPE" :value="scope.row.bizType" />
         </template>

@@ -21,7 +21,7 @@ public class OwnerPageReqVO extends PageParam {
     @Schema(description = "机构ID", example = "15270")
     private Long orgId;
 
-    @Schema(description = "租客名称", example = "芋艿")
+    @Schema(description = "租客名称", example = "智慧园区")
     private String name;
 
     @Schema(description = "是否个人，1个人，0公司")

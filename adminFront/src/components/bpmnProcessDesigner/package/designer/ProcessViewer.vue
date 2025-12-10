@@ -88,7 +88,7 @@ const createNewDiagram = async (xml) => {
 }
 
 /* 高亮流程图 */
-// TODO 芋艿：如果多个 endActivity 的话，目前的逻辑可能有一定的问题。https://www.jdon.com/workflow/multi-events.html
+// 需要替换 芋艿：如果多个 endActivity 的话，目前的逻辑可能有一定的问题。https://www.jdon.com/workflow/multi-events.html
 const highlightDiagram = async () => {
   const activityList = activityLists.value
   if (activityList.length === 0) {
@@ -97,7 +97,7 @@ const highlightDiagram = async () => {
   // 参考自 https://gitee.com/tony2y/RuoYi-flowable/blob/master/ruoyi-ui/src/components/Process/index.vue#L222 实现
   // 再次基础上，增加不同审批结果的颜色等等
   let canvas = bpmnModeler.get('canvas')
-  let todoActivity: any = activityList.find((m: any) => !m.endTime) // 找到待办的任务
+  let 需要替换Activity: any = activityList.find((m: any) => !m.endTime) // 找到待办的任务
   let endActivity: any = activityList[activityList.length - 1] // 获得最后一个任务
   let findProcessTask = false //是否已经高亮了进行中的任务
   //进行中高亮之后的任务 key 集合，用于过滤掉 taskList 进行中后面的任务，避免进行中后面的数据 Hover 还有数据
@@ -137,20 +137,20 @@ const highlightDiagram = async () => {
         let targetActivity: any = activityList.find((m: any) => m.key === nn.targetRef.id)
         // 如果目标活动存在，则根据该活动是否结束，进行【bpmn:SequenceFlow】连线的高亮设置
         if (targetActivity) {
-          canvas.addMarker(nn.id, targetActivity.endTime ? 'highlight' : 'highlight-todo')
+          canvas.addMarker(nn.id, targetActivity.endTime ? 'highlight' : 'highlight-需要替换')
         } else if (nn.targetRef.$type === 'bpmn:ExclusiveGateway') {
-          // TODO 芋艿：这个流程，暂时没走到过
-          canvas.addMarker(nn.id, activity.endTime ? 'highlight' : 'highlight-todo')
-          canvas.addMarker(nn.targetRef.id, activity.endTime ? 'highlight' : 'highlight-todo')
+          // 需要替换 芋艿：这个流程，暂时没走到过
+          canvas.addMarker(nn.id, activity.endTime ? 'highlight' : 'highlight-需要替换')
+          canvas.addMarker(nn.targetRef.id, activity.endTime ? 'highlight' : 'highlight-需要替换')
         } else if (nn.targetRef.$type === 'bpmn:EndEvent') {
-          // TODO 芋艿：这个流程，暂时没走到过
-          if (!todoActivity && endActivity.key === n.id) {
+          // 需要替换 芋艿：这个流程，暂时没走到过
+          if (!需要替换Activity && endActivity.key === n.id) {
             canvas.addMarker(nn.id, 'highlight')
             canvas.addMarker(nn.targetRef.id, 'highlight')
           }
           if (!activity.endTime) {
-            canvas.addMarker(nn.id, 'highlight-todo')
-            canvas.addMarker(nn.targetRef.id, 'highlight-todo')
+            canvas.addMarker(nn.id, 'highlight-需要替换')
+            canvas.addMarker(nn.targetRef.id, 'highlight-需要替换')
           }
         }
       })
@@ -239,13 +239,13 @@ const highlightDiagram = async () => {
 }
 
 const getActivityHighlightCss = (activity) => {
-  return activity.endTime ? 'highlight' : 'highlight-todo'
+  return activity.endTime ? 'highlight' : 'highlight-需要替换'
 }
 
 const getResultCss = (status) => {
   if (status === 1) {
     // 审批中
-    return 'highlight-todo'
+    return 'highlight-需要替换'
   } else if (status === 2) {
     // 已通过
     return 'highlight'
@@ -260,13 +260,13 @@ const getResultCss = (status) => {
     return 'highlight-return'
   } else if (status === 6) {
     // 委派
-    return 'highlight-todo'
+    return 'highlight-需要替换'
   } else if (status === 7) {
     // 审批通过中
-    return 'highlight-todo'
+    return 'highlight-需要替换'
   } else if (status === 0) {
     // 待审批
-    return 'highlight-todo'
+    return 'highlight-需要替换'
   }
   return ''
 }
@@ -441,27 +441,27 @@ watch(
 
 <style lang="scss">
 /** 处理中 */
-.highlight-todo.djs-connection > .djs-visual > path {
+.highlight-需要替换.djs-connection > .djs-visual > path {
   stroke: #1890ff !important;
   stroke-dasharray: 4px !important;
   fill-opacity: 0.2 !important;
 }
 
-.highlight-todo.djs-shape .djs-visual > :nth-child(1) {
+.highlight-需要替换.djs-shape .djs-visual > :nth-child(1) {
   fill: #1890ff !important;
   stroke: #1890ff !important;
   stroke-dasharray: 4px !important;
   fill-opacity: 0.2 !important;
 }
 
-:deep(.highlight-todo.djs-connection > .djs-visual > path) {
+:deep(.highlight-需要替换.djs-connection > .djs-visual > path) {
   stroke: #1890ff !important;
   stroke-dasharray: 4px !important;
   fill-opacity: 0.2 !important;
   marker-end: url('#sequenceflow-end-_E7DFDF-_E7DFDF-803g1kf6zwzmcig1y2ulm5egr');
 }
 
-:deep(.highlight-todo.djs-shape .djs-visual > :nth-child(1)) {
+:deep(.highlight-需要替换.djs-shape .djs-visual > :nth-child(1)) {
   fill: #1890ff !important;
   stroke: #1890ff !important;
   stroke-dasharray: 4px !important;

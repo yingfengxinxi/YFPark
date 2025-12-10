@@ -14,7 +14,7 @@ public class TagTerminationSaveReqVO  extends TenantBaseDO {
     @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "26504")
     private Long id;
 
-    @Schema(description = "标签名称", example = "芋艿")
+    @Schema(description = "标签名称", example = "智慧园区")
     private String name;
 
     @Schema(description = "标签描述")

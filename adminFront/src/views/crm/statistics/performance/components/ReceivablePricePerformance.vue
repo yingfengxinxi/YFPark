@@ -17,7 +17,7 @@
         :prop="item.prop"
         align="center"
       >
-        <!-- TODO @scholar：IDEA 爆红的处理 -->
+        <!-- 需要替换 @scholar：IDEA 爆红的处理 -->
         <template #default="scope">
           {{ scope.row[item.prop] }}
         </template>
@@ -121,7 +121,7 @@ const echartsOption = reactive<EChartsOption>({
       type: 'value',
       name: '',
       axisTick: {
-        // TODO @scholar：IDEA 爆红的处理
+        // 需要替换 @scholar：IDEA 爆红的处理
         alignWithLabel: true,
         lineStyle: {
           width: 0
@@ -193,7 +193,7 @@ const loadData = async () => {
 }
 
 // 初始化数据
-// TODO @scholar：加个 as any[]，避免 idea 爆红
+// 需要替换 @scholar：加个 as any[]，避免 idea 爆红
 const columnsData = reactive([] as any[])
 const tableData = reactive([
   { title: '当月回款金额统计（元）' },
@@ -215,7 +215,7 @@ const convertListData = () => {
     tableData[0]['prop' + index] = item.currentMonthCount
     tableData[1]['prop' + index] = item.lastMonthCount
     tableData[2]['prop' + index] = item.lastYearCount
-    // TODO @scholar：百分比，使用 erpCalculatePercentage 直接计算；如果是 0，则返回 0，统一就好哈；
+    // 需要替换 @scholar：百分比，使用 erpCalculatePercentage 直接计算；如果是 0，则返回 0，统一就好哈；
     tableData[3]['prop' + index] =
       item.lastMonthCount !== 0 ? (item.currentMonthCount / item.lastMonthCount).toFixed(2) : 'NULL'
     tableData[4]['prop' + index] =

@@ -28,7 +28,7 @@ public class EnergyTaskSaveReqVO  extends TenantBaseDO {
     @Schema(description = "任务key")
     private String taskKey;
 
-    @Schema(description = "任务名称", example = "芋艿")
+    @Schema(description = "任务名称", example = "智慧园区")
     private String taskName;
 
     @Schema(description = "任务编号")

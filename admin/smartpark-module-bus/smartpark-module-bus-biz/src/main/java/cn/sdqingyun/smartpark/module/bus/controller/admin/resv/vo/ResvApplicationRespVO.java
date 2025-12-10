@@ -21,7 +21,7 @@ public class ResvApplicationRespVO {
     @ExcelProperty("应用名称")
     private String name;
 
-    @Schema(description = "应用简称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @Schema(description = "应用简称", requiredMode = Schema.RequiredMode.REQUIRED, example = "智慧园区")
     @ExcelProperty("应用简称")
     private String shortName;
 

@@ -44,7 +44,7 @@ public class TenantJobAspect {
         // 逐个租户，执行 Job
         Map<Long, String> results = new ConcurrentHashMap<>();
         tenantIds.parallelStream().forEach(tenantId -> {
-            // TODO 芋艿：先通过 parallel 实现并行；1）多个租户，是一条执行日志；2）异常的情况
+            // 需要替换 智慧园区：先通过 parallel 实现并行；1）多个租户，是一条执行日志；2）异常的情况
             TenantUtils.execute(tenantId, () -> {
                 try {
                     joinPoint.proceed();

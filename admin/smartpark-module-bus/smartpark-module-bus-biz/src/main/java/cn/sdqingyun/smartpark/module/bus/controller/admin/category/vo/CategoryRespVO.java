@@ -26,7 +26,7 @@ public class CategoryRespVO {
     @ExcelProperty("应用标识")
     private String application;
 
-    @Schema(description = "大类名称", example = "芋艿")
+    @Schema(description = "大类名称", example = "智慧园区")
     @ExcelProperty("大类名称")
     private String name;
 

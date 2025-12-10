@@ -29,7 +29,7 @@ public class OwnerFilesRespVO {
     @ExcelProperty("用户服务ID")
     private Long uid;
 
-    @Schema(description = "文件名", example = "芋艿")
+    @Schema(description = "文件名", example = "智慧园区")
     @ExcelProperty("文件名")
     private String name;
 

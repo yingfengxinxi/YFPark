@@ -19,7 +19,7 @@ public class CategorySaveReqVO  extends TenantBaseDO {
     @Schema(description = "应用标识")
     private String application;
 
-    @Schema(description = "大类名称", example = "芋艿")
+    @Schema(description = "大类名称", example = "智慧园区")
     private String name;
 
     @Schema(description = "运作模式;1=派单+抢单2=派单", example = "1")

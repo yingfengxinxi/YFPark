@@ -13,7 +13,7 @@ public class VillageTypeSaveReqVO  extends TenantBaseDO {
     @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "14036")
     private Long id;
 
-    @Schema(description = "类型名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @Schema(description = "类型名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "智慧园区")
     @NotEmpty(message = "类型名称不能为空")
     private String name;
 

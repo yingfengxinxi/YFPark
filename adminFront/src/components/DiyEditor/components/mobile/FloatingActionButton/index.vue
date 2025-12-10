@@ -27,7 +27,7 @@
         </span>
       </div>
     </template>
-    <!-- todo: @owen 使用APP主题色 -->
+    <!-- 需要替换: @owen 使用APP主题色 -->
     <el-button type="primary" size="large" circle @click="handleToggleFab">
       <Icon icon="ep:plus" :class="['fab-icon', { active: expanded }]" />
     </el-button>

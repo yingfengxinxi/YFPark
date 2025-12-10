@@ -152,7 +152,7 @@ declare module 'vue' {
     TableSelectForm: typeof import('./../components/Table/src/TableSelectForm.vue')['default']
     TagIdArr: typeof import('./../components/TagIdArr/src/TagIdArr.vue')['default']
     TagIdArrList: typeof import('./../components/TagIdArrList/src/TagIdArrList.vue')['default']
-    Todo: typeof import('./../views/bpm/task/todo/index.vue')['default']
+    需要替换: typeof import('./../views/bpm/task/需要替换/index.vue')['default']
     Tooltip: typeof import('./../components/Tooltip/src/Tooltip.vue')['default']
     UploadFile: typeof import('./../components/UploadFile/src/UploadFile.vue')['default']
     UploadImg: typeof import('./../components/UploadFile/src/UploadImg.vue')['default']

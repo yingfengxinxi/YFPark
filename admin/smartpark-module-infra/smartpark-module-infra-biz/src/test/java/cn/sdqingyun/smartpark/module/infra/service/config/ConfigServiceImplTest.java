@@ -147,7 +147,7 @@ public class ConfigServiceImplTest extends BaseDbUnitTest {
     public void testGetConfigPage() {
         // mock 数据
         ConfigDO dbConfig = randomConfigDO(o -> { // 等会查询到
-            o.setName("芋艿");
+            o.setName("智慧园区");
             o.setConfigKey("yunai");
             o.setType(ConfigTypeEnum.SYSTEM.getType());
             o.setCreateTime(buildTime(2021, 2, 1));

@@ -199,7 +199,7 @@ export default {
     notice: 'Announcement',
     project: 'Project',
     access: 'Project access',
-    toDo: 'To do',
+    需要替换: 'To do',
     introduction: 'A serious introduction',
     shortcutOperation: 'Quick entry',
     operation: 'Operation',

@@ -21,7 +21,7 @@ public class EnvEnvironmentPostProcessor implements EnvironmentPostProcessor {
 
     private static final Set<String> TARGET_TAG_KEYS = SetUtils.asSet(
             "spring.cloud.nacos.discovery.metadata.tag" // Nacos 注册中心
-            // MQ TODO
+            // MQ 需要替换
     );
 
     @Override

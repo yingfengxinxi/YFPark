@@ -41,7 +41,7 @@ public class PropertyStuffReturnRespVO {
     @ExcelProperty("申请部门id")
     private Long departmentId;
 
-    @Schema(description = "申请部门", example = "芋艿")
+    @Schema(description = "申请部门", example = "智慧园区")
     @ExcelProperty("申请部门")
     private String departmentName;
 

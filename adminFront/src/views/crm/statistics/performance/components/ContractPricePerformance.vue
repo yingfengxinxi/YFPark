@@ -1,5 +1,5 @@
 <!-- 员工业绩统计 -->
-<!-- TODO @scholar:参考 ReceivablePricePerformance 建议改 -->
+<!-- 需要替换 @scholar:参考 ReceivablePricePerformance 建议改 -->
 <template>
   <!-- Echarts图 -->
   <el-card shadow="never">

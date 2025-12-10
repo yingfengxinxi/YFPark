@@ -25,7 +25,7 @@ public class UserFieldExtendSaveReqVO  extends TenantBaseDO {
     @NotNull(message = "关联 village_user_system_field_extend id不能为空")
     private Long sysFieldId;
 
-    @Schema(description = "字段名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @Schema(description = "字段名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "智慧园区")
     @NotEmpty(message = "字段名称不能为空")
     private String fieldName;
 

@@ -82,12 +82,12 @@ public class PhoneCategoryController {
     @PreAuthorize("@ss.hasPermission('bus:phone-category:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportPhoneCategoryExcel(@Valid PhoneCategoryPageReqVO pageReqVO,
-              HttpServletResponse response) throws IOException {
+                                         HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<PhoneCategoryDO> list = phoneCategoryService.getPhoneCategoryPage(pageReqVO).getList();
         // 导出 Excel
         ExcelUtils.write(response, "项目电话类型.xls", "数据", PhoneCategoryRespVO.class,
-                        BeanUtils.toBean(list, PhoneCategoryRespVO.class));
+                BeanUtils.toBean(list, PhoneCategoryRespVO.class));
     }
 
     @GetMapping("/getpage")

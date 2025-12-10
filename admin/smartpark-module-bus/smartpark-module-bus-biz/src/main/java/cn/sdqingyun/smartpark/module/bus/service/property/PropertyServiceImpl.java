@@ -124,7 +124,7 @@ public class PropertyServiceImpl implements PropertyService {
         approve.setCuserUid(loginUserId);
         approve.setMuserUid(loginUserId);
         approve.setProcessType(OperateTypeEnum.PUT_DEPOSITORY.getCode());
-        approve.setContent("todo");
+        approve.setContent("需要替换");
         approve.setLaunchTime(LocalDateTime.now());
 
         propertyApproveMapper.insert(approve);
@@ -1012,7 +1012,7 @@ public class PropertyServiceImpl implements PropertyService {
         approve.setCuserUid(loginUserId);
         approve.setMuserUid(loginUserId);
         approve.setProcessType(operateType);
-        approve.setContent("todo");
+        approve.setContent("需要替换");
         approve.setLaunchTime(LocalDateTime.now());
 
         propertyApproveMapper.insert(approve);

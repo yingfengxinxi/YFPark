@@ -21,9 +21,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
+@FeignClient(name = ApiConstants.NAME) // 需要替换 智慧园区：fallbackFactory =
 @Tag(name = "RPC 服务 - 管理员用户")
-//@AutoTrans(namespace = PREFIX, fields = {"nickname"}) // TODO @芋艿：需要 easy-trans 做个 bugfix
+//@AutoTrans(namespace = PREFIX, fields = {"nickname"}) // 需要替换 @智慧园区：需要 easy-trans 做个 bugfix
 public interface AdminUserApi extends AutoTransable<AdminUserRespDTO> {
 
     String PREFIX = ApiConstants.PREFIX + "/user";

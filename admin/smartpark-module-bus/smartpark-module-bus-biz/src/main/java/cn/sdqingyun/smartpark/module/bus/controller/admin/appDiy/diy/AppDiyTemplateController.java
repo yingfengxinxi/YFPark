@@ -35,7 +35,7 @@ public class AppDiyTemplateController {
     @Resource
     private DiyPageService diyPageService;
 
-    // TODO @疯狂：要不要把 used 和 get 接口合并哈；不传递 id，直接拿默认；
+    // 需要替换 @疯狂：要不要把 used 和 get 接口合并哈；不传递 id，直接拿默认；
     @GetMapping("/used")
     @Operation(summary = "使用中的装修模板")
     public CommonResult<AppDiyTemplatePropertyRespVO> getUsedDiyTemplate() {

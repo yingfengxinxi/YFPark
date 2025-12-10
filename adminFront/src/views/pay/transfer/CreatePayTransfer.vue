@@ -87,7 +87,7 @@ const channelCode = computed(() => {
   if (transfer.type === 2) {
     channelCode = 'wx_app'
   }
-  // TODO 银行卡和钱包 转账待实现
+  // 需要替换 银行卡和钱包 转账待实现
   return channelCode
 })
 

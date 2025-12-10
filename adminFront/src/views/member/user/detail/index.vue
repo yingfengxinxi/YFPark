@@ -24,7 +24,7 @@
         </el-card>
       </el-col>
       <!-- 下边：账户明细 -->
-      <!-- TODO 芋艿：【订单管理】【售后管理】【收藏记录】-->
+      <!-- 需要替换 芋艿：【订单管理】【售后管理】【收藏记录】-->
       <el-card header="账户明细" style="width: 100%; margin-top: 20px" shadow="never">
         <template #header>
           <CardTitle title="账户明细" />
@@ -39,7 +39,7 @@
           <el-tab-pane label="成长值" lazy>
             <UserExperienceRecordList :user-id="id" />
           </el-tab-pane>
-          <!-- TODO @jason：增加一个余额变化； -->
+          <!-- 需要替换 @jason：增加一个余额变化； -->
           <el-tab-pane label="余额" lazy>余额(WIP)</el-tab-pane>
           <el-tab-pane label="收货地址" lazy>
             <UserAddressList :user-id="id" />

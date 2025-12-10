@@ -68,7 +68,7 @@ public class WorkOrderProposeOrderRespVO {
     @ExcelProperty("租客名称")
     private String ownerName;
 
-    @Schema(description = "订单名称", example = "芋艿")
+    @Schema(description = "订单名称", example = "智慧园区")
     @ExcelProperty("订单名称")
     private String orderName;
 

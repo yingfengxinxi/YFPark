@@ -1,21 +1,17 @@
 package cn.sdqingyun.smartpark.module.bus.service.village;
 
-import org.springframework.stereotype.Service;
-import jakarta.annotation.Resource;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.*;
-import cn.sdqingyun.smartpark.module.bus.controller.admin.village.vo.*;
-import cn.sdqingyun.smartpark.module.bus.dal.dataobject.village.VillageTypeDictDO;
 import cn.sdqingyun.smartpark.framework.common.pojo.PageResult;
-import cn.sdqingyun.smartpark.framework.common.pojo.PageParam;
 import cn.sdqingyun.smartpark.framework.common.util.object.BeanUtils;
-
+import cn.sdqingyun.smartpark.module.bus.controller.admin.village.vo.VillageTypeDictPageReqVO;
+import cn.sdqingyun.smartpark.module.bus.controller.admin.village.vo.VillageTypeDictSaveReqVO;
+import cn.sdqingyun.smartpark.module.bus.dal.dataobject.village.VillageTypeDictDO;
 import cn.sdqingyun.smartpark.module.bus.dal.mysql.village.VillageTypeDictMapper;
+import jakarta.annotation.Resource;
+import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import static cn.sdqingyun.smartpark.framework.common.exception.util.ServiceExceptionUtil.exception;
-import static cn.sdqingyun.smartpark.module.bus.enums.ErrorCodeConstants.*;
+import static cn.sdqingyun.smartpark.module.bus.enums.ErrorCodeConstants.VILLAGE_TYPE_DICT_NOT_EXISTS;
 
 /**
  * 项目类型字典 Service 实现类

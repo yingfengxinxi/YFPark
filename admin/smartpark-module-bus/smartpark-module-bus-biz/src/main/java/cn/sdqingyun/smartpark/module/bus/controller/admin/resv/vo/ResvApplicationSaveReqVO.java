@@ -17,7 +17,7 @@ public class ResvApplicationSaveReqVO  extends TenantBaseDO {
     @NotEmpty(message = "应用名称不能为空")
     private String name;
 
-    @Schema(description = "应用简称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @Schema(description = "应用简称", requiredMode = Schema.RequiredMode.REQUIRED, example = "智慧园区")
     @NotEmpty(message = "应用简称不能为空")
     private String shortName;
 

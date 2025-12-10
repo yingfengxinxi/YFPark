@@ -41,7 +41,7 @@ public class EnergyBindPageReqVO extends PageParam {
     @Schema(description = "关联自定义表ID", example = "30103")
     private Long parentEnergyId;
 
-    @Schema(description = "表名称", example = "芋艿")
+    @Schema(description = "表名称", example = "智慧园区")
     private String name;
 
     @Schema(description = "绑定表数据集合，json存储")

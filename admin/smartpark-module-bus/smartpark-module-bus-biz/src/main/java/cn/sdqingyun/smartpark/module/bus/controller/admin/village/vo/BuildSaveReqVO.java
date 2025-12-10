@@ -16,7 +16,7 @@ public class BuildSaveReqVO {
     @Schema(description = "楼栋编号")
     private String buildNumber;
 
-    @Schema(description = "楼栋名称", example = "芋艿")
+    @Schema(description = "楼栋名称", example = "智慧园区")
     private String buildName;
 
     @Schema(description = "楼宇lOGO")

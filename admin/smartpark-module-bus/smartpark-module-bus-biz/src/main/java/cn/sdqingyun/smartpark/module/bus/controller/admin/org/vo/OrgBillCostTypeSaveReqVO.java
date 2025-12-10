@@ -27,7 +27,7 @@ public class OrgBillCostTypeSaveReqVO  extends TenantBaseDO {
     @NotEmpty(message = "必须缴费的项目，否则影响业务使用不能为空")
     private String isImportant;
 
-    @Schema(description = "费用类型名称", example = "芋艿")
+    @Schema(description = "费用类型名称", example = "智慧园区")
     private String name;
 
     @Schema(description = "费用类型", example = "2")

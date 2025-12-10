@@ -42,7 +42,7 @@ public class ${sceneEnum.prefixClass}${table.className}RespVO {
 ## 2. 处理 Excel 导出
 #if ("$!column.dictType" != "")##处理枚举值
     @ExcelProperty(value = "${column.columnComment}", converter = DictConvert.class)
-    @DictFormat("${column.dictType}") // TODO 代码优化：建议设置到对应的 DictTypeConstants 枚举类中
+    @DictFormat("${column.dictType}") // 需要替换 代码优化：建议设置到对应的 DictTypeConstants 枚举类中
 #else
     @ExcelProperty("${column.columnComment}")
 #end

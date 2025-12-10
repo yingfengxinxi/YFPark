@@ -19,7 +19,7 @@ public class VillagePageReqVO extends PageParam {
     @Schema(description = "项目名称", example = "张三")
     private String name;
 
-    @Schema(description = "项目名称缩写", example = "芋艿")
+    @Schema(description = "项目名称缩写", example = "智慧园区")
     private String shortName;
 
     @Schema(description = "项目介绍")

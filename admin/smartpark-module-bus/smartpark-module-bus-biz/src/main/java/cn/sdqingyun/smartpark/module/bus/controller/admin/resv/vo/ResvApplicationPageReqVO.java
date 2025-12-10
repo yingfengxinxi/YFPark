@@ -18,7 +18,7 @@ public class ResvApplicationPageReqVO extends PageParam {
     @Schema(description = "应用名称", example = "李四")
     private String name;
 
-    @Schema(description = "应用简称", example = "芋艿")
+    @Schema(description = "应用简称", example = "智慧园区")
     private String shortName;
 
     @Schema(description = "应用标志")

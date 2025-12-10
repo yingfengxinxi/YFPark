@@ -141,7 +141,7 @@ public class BillStreamPageReqVO extends PageParam {
     @Schema(description = "对方子账户", example = "26839")
     private String sonAccount;
 
-    @Schema(description = "对方子账户名称", example = "芋艿")
+    @Schema(description = "对方子账户名称", example = "智慧园区")
     private String sonAccountName;
 
     @Schema(description = "对方子账户余额调整状态", example = "1")

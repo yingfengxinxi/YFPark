@@ -20,7 +20,7 @@ public class SecurityConfiguration {
 
             @Override
             public void customize(AuthorizeHttpRequestsConfigurer<HttpSecurity>.AuthorizationManagerRequestMatcherRegistry registry) {
-                // TODO 芋艿：这个每个项目都需要重复配置，得捉摸有没通用的方案
+                // 需要替换 智慧园区：这个每个项目都需要重复配置，得捉摸有没通用的方案
                 // Swagger 接口文档
                 registry.requestMatchers("/v3/api-docs/**").permitAll() // 元数据
                         .requestMatchers("/swagger-ui.html").permitAll(); // Swagger UI

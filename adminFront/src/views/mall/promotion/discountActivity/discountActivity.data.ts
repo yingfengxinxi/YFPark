@@ -1,7 +1,7 @@
 import type { CrudSchema } from '@/hooks/web/useCrudSchemas'
 import { dateFormatter2 } from '@/utils/formatTime'
 
-// TODO @zhangshai：
+// 需要替换 @zhangshai：
 // 表单校验
 export const rules = reactive({
   spuId: [required],

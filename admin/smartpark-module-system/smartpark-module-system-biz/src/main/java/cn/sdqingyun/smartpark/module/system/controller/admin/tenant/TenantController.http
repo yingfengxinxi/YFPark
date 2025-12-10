@@ -9,7 +9,7 @@ tenant-id: {{adminTenentId}}
 
 {
   "name": "智慧园区",
-  "contactName": "芋艿",
+  "contactName": "智慧园区",
   "contactMobile": "131111111111",
   "status": 0,
   "domain": "https://xxx",

@@ -31,7 +31,7 @@ import java.util.List;
 import static cn.sdqingyun.smartpark.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.sdqingyun.smartpark.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 岗位")
+@Tag(name = "管理后台 - 园区岗位")
 @RestController
 @RequestMapping("/system/post")
 @Validated

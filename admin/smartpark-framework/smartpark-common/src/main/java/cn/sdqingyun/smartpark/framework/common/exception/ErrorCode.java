@@ -10,7 +10,7 @@ import lombok.Data;
  * 全局错误码，占用 [0, 999], 参见 {@link GlobalErrorCodeConstants}
  * 业务异常错误码，占用 [1 000 000 000, +∞)，参见 {@link ServiceErrorCodeRange}
  *
- * TODO 错误码设计成对象的原因，为未来的 i18 国际化做准备
+ * 需要替换 错误码设计成对象的原因，为未来的 i18 国际化做准备
  */
 @Data
 public class ErrorCode {

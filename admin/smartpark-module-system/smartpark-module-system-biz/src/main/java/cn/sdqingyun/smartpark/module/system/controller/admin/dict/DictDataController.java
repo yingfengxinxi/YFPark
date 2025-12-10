@@ -29,7 +29,7 @@ import java.util.List;
 import static cn.sdqingyun.smartpark.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.sdqingyun.smartpark.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 字典数据")
+@Tag(name = "管理后台 - 园区后台字典数据")
 @RestController
 @RequestMapping("/system/dict-data")
 @Validated

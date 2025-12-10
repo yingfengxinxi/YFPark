@@ -17,7 +17,7 @@ public class TagTerminationRespVO {
     @ExcelProperty("编号")
     private Long id;
 
-    @Schema(description = "标签名称", example = "芋艿")
+    @Schema(description = "标签名称", example = "智慧园区")
     @ExcelProperty("标签名称")
     private String name;
 

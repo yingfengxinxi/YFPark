@@ -24,7 +24,7 @@ public class OwnerFilesPageReqVO extends PageParam {
     @Schema(description = "用户服务ID", example = "12906")
     private Long uid;
 
-    @Schema(description = "文件名", example = "芋艿")
+    @Schema(description = "文件名", example = "智慧园区")
     private String name;
 
     @Schema(description = "文件网址", example = "https://xxx")

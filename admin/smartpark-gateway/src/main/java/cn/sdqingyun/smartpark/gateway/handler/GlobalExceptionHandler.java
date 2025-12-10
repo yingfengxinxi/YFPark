@@ -52,7 +52,7 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
      */
     private CommonResult<?> responseStatusExceptionHandler(ServerWebExchange exchange,
                                                            ResponseStatusException ex) {
-        // TODO 芋艿：这里要精细化翻译，默认返回用户是看不懂的
+        // 需要替换 智慧园区：这里要精细化翻译，默认返回用户是看不懂的
         ServerHttpRequest request = exchange.getRequest();
         log.error("[responseStatusExceptionHandler][uri({}/{}) 发生异常]", request.getURI(), request.getMethod(), ex);
         return CommonResult.error(ex.getStatusCode().value(), ex.getReason());
@@ -66,7 +66,7 @@ public class GlobalExceptionHandler implements ErrorWebExceptionHandler {
                                                    Throwable ex) {
         ServerHttpRequest request = exchange.getRequest();
         log.error("[defaultExceptionHandler][uri({}/{}) 发生异常]", request.getURI(), request.getMethod(), ex);
-        // TODO 芋艿：是否要插入异常日志呢？
+        // 需要替换 智慧园区：是否要插入异常日志呢？
         // 返回 ERROR CommonResult
         return CommonResult.error(INTERNAL_SERVER_ERROR.getCode(), INTERNAL_SERVER_ERROR.getMsg());
     }

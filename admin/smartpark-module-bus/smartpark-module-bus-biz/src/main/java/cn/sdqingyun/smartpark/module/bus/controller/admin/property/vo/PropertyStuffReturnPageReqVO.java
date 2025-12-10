@@ -33,7 +33,7 @@ public class PropertyStuffReturnPageReqVO extends PageParam {
     @Schema(description = "申请部门id", example = "5775")
     private Long departmentId;
 
-    @Schema(description = "申请部门", example = "芋艿")
+    @Schema(description = "申请部门", example = "智慧园区")
     private String departmentName;
 
     @Schema(description = "归还仓库id", example = "5855")

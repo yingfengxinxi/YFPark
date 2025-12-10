@@ -17,7 +17,7 @@ public class VillageTypeRespVO {
     @ExcelProperty("编号")
     private Long id;
 
-    @Schema(description = "类型名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @Schema(description = "类型名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "智慧园区")
     @ExcelProperty("类型名称")
     private String name;
 

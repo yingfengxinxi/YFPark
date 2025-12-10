@@ -17,7 +17,7 @@ public class OrgSellerRespVO {
     @ExcelProperty("编号")
     private Long id;
 
-    @Schema(description = "售方公司名称", example = "芋艿")
+    @Schema(description = "售方公司名称", example = "智慧园区")
     @ExcelProperty("售方公司名称")
     private String companyName;
 

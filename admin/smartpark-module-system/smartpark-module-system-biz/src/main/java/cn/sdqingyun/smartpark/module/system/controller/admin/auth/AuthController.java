@@ -39,7 +39,7 @@ import static cn.sdqingyun.smartpark.framework.common.pojo.CommonResult.success;
 import static cn.sdqingyun.smartpark.framework.common.util.collection.CollectionUtils.convertSet;
 import static cn.sdqingyun.smartpark.framework.security.core.util.SecurityFrameworkUtils.getLoginUserId;
 
-@Tag(name = "管理后台 - 认证")
+@Tag(name = "管理后台 - 园区后台认证")
 @RestController
 @RequestMapping("/system/auth")
 @Validated

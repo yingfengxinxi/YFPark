@@ -33,7 +33,7 @@ public class OrgBillCostTypeRespVO {
     @ExcelProperty("必须缴费的项目，否则影响业务使用")
     private String isImportant;
 
-    @Schema(description = "费用类型名称", example = "芋艿")
+    @Schema(description = "费用类型名称", example = "智慧园区")
     @ExcelProperty("费用类型名称")
     private String name;
 

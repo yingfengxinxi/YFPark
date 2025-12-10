@@ -97,7 +97,7 @@ public class UserExtendsRespVO {
     @ExcelProperty("职务")
     private String position;
 
-    @Schema(description = "称呼", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @Schema(description = "称呼", requiredMode = Schema.RequiredMode.REQUIRED, example = "智慧园区")
     @ExcelProperty("称呼")
     private String callName;
 

@@ -570,7 +570,7 @@ public class WordUtil {
             try {
                 returnValue=map.get(key)!=null ? map.get(key).toString() : "";
             } catch (Exception e) {
-                // TODO: handle exception
+                // 需要替换: handle exception
                 System.out.println("key:"+key+"***"+e);
                 returnValue="";
             }

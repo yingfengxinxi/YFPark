@@ -526,17 +526,17 @@ public class ContractOrderBillServiceImpl implements ContractOrderBillService {
                 //几项
                 map.put("count", contractOrderBillDOS.size());
                 //应收租金
-                double receivable = contractOrderBillDOS.stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivable())).sum();
+                double receivable = contractOrderBillDOS.stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivable())).sum();
                 map.put("receivable", receivable);
                 //滞纳金
-                double lateFee = contractOrderBillDOS.stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getLateFee())).sum();
+                double lateFee = contractOrderBillDOS.stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getLateFee())).sum();
                 map.put("lateFee", lateFee);
                 //应收金额
-                double receivablePayableAmount = contractOrderBillDOS.stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayableAmount())).sum();
+                double receivablePayableAmount = contractOrderBillDOS.stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayableAmount())).sum();
                 map.put("receivablePayableAmount", receivablePayableAmount);
 
                 //实收金额
-                double receivablePayment = contractOrderBillDOS.stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayment())).sum();
+                double receivablePayment = contractOrderBillDOS.stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayment())).sum();
                 map.put("receivablePayment", receivablePayment);
 
                 //状态
@@ -561,7 +561,7 @@ public class ContractOrderBillServiceImpl implements ContractOrderBillService {
                         stream().
                         filter(contractOrderBillDO -> contractOrderBillDO.getBillStatus().equals("1")).
                         collect(Collectors.toList()).
-                        stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayableAmount())).sum();
+                        stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayableAmount())).sum();
                 map.put("ssMoney", ssMoney);
 
                 map.put("data", contractOrderBillDOS);
@@ -643,7 +643,7 @@ public class ContractOrderBillServiceImpl implements ContractOrderBillService {
 
         List<ContractOrderBillCollectionVO> collectionBillList = orderBillMapper.getCollectionBillList(ids);
         if (CollectionUtils.isNotEmpty(collectionBillList)) {
-            double receivable = collectionBillList.stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayableAmount())).sum();
+            double receivable = collectionBillList.stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayableAmount())).sum();
             BigDecimal receivablePayableAmount = new BigDecimal(receivable);
 
 
@@ -651,7 +651,7 @@ public class ContractOrderBillServiceImpl implements ContractOrderBillService {
             map.put("receivablePayableAmount", Tools.DecimalFormat(receivablePayableAmount));
 
             //已收总金额
-            BigDecimal receivablePayment = new BigDecimal(collectionBillList.stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayment())).sum());
+            BigDecimal receivablePayment = new BigDecimal(collectionBillList.stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayment())).sum());
             map.put("receivablePayment", receivablePayment);
 
             //待收金额
@@ -1758,17 +1758,17 @@ public class ContractOrderBillServiceImpl implements ContractOrderBillService {
                 //几项
                 map.put("count", contractOrderBillDOS.size());
                 //应收金额
-                double receivable = contractOrderBillDOS.stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivable())).sum();
+                double receivable = contractOrderBillDOS.stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivable())).sum();
                 map.put("receivable", receivable);
                 //滞纳金
-                double lateFee = contractOrderBillDOS.stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getLateFee())).sum();
+                double lateFee = contractOrderBillDOS.stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getLateFee())).sum();
                 map.put("lateFee", lateFee);
                 //应收金额
-                double receivablePayableAmount = contractOrderBillDOS.stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayableAmount())).sum();
+                double receivablePayableAmount = contractOrderBillDOS.stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayableAmount())).sum();
                 map.put("receivablePayableAmount", receivablePayableAmount);
 
                 //实收金额
-                double receivablePayment = contractOrderBillDOS.stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayment())).sum();
+                double receivablePayment = contractOrderBillDOS.stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayment())).sum();
                 map.put("receivablePayment", receivablePayment);
 
                 //状态
@@ -1906,11 +1906,11 @@ public class ContractOrderBillServiceImpl implements ContractOrderBillService {
             payOrderCreateReqDTO.setChannelId(channelCodeResult.getData());
             //计算金额；(应交金额+滞纳金)-实缴金额
             //应收金额
-            Double receivableD = contractOrderBillDOS.stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivable())).sum();
+            Double receivableD = contractOrderBillDOS.stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivable())).sum();
             //违约金
-            Double lateFeeD = contractOrderBillDOS.stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getLateFee())).sum();
+            Double lateFeeD = contractOrderBillDOS.stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getLateFee())).sum();
             //实缴金额
-            Double receivablePaymentD = contractOrderBillDOS.stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayment())).sum();
+            Double receivablePaymentD = contractOrderBillDOS.stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getReceivablePayment())).sum();
             BigDecimal receivable = new BigDecimal(String.valueOf(receivableD)).add(new BigDecimal(String.valueOf(lateFeeD)));
             BigDecimal receivablePayment = receivable.subtract(new BigDecimal(String.valueOf(receivablePaymentD)));
             String msg = "支付费用" + receivablePayment + "元";

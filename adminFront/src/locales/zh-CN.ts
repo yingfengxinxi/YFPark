@@ -202,7 +202,7 @@ export default {
     notice: '通知公告',
     project: '项目数',
     access: '项目访问',
-    toDo: '待办',
+    需要替换: '待办',
     introduction: '一个正经的简介',
     shortcutOperation: '快捷入口',
     operation: '操作',

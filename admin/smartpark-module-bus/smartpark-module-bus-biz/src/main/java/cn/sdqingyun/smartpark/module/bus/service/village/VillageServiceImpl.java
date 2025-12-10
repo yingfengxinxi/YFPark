@@ -86,7 +86,7 @@ public class VillageServiceImpl implements VillageService {
     @Transactional(rollbackFor = Exception.class)
     public void deleteVillage(Long id) {
         // 校验存在
-        VillageDO villageDO = villageMapper.selectById( id );
+        VillageDO villageDO = villageMapper.selectById(id);
         if (villageDO == null) {
             throw exception(VILLAGE_NOT_EXISTS);
         }
@@ -143,7 +143,7 @@ public class VillageServiceImpl implements VillageService {
             //校验项目名称是否存在
             validateVillageExistsByName(createReqVO.getName());
 
-            if (CollUtil.isNotEmpty( createReqVO.getBuildList() ) && createReqVO.getBuildList().size() > 3) {
+            if (CollUtil.isNotEmpty(createReqVO.getBuildList()) && createReqVO.getBuildList().size() > 3) {
                 throw exception(NUMBER_OF_BUILDINGS);
             }
 
@@ -275,8 +275,8 @@ public class VillageServiceImpl implements VillageService {
         }
 
         for (Long aLong : villageIdArr) {
-            VillageDO villageDO = villageMapper.selectById( aLong );
-            villageList.add( villageDO );
+            VillageDO villageDO = villageMapper.selectById(aLong);
+            villageList.add(villageDO);
         }
 
         villageList.sort(Comparator.comparing(VillageDO::getSort).thenComparing(VillageDO::getId).reversed());
@@ -337,7 +337,6 @@ public class VillageServiceImpl implements VillageService {
     }
 
     /**
-     *
      * @param parkName
      * @return
      */
@@ -356,9 +355,9 @@ public class VillageServiceImpl implements VillageService {
     public BuildArrRespVO villageAndBuildList(VillageReqVO villageReqVO) {
         BuildArrRespVO respVO = new BuildArrRespVO();
         LambdaQueryWrapperX<VillageDO> wrapperX = new LambdaQueryWrapperX<>();
-        wrapperX.eq( VillageDO::getType, villageReqVO.getType() );
-        List<VillageDO> dos = villageMapper.selectList( wrapperX );
-        if(CollUtil.isEmpty( dos )){
+        wrapperX.eq(VillageDO::getType, villageReqVO.getType());
+        List<VillageDO> dos = villageMapper.selectList(wrapperX);
+        if (CollUtil.isEmpty(dos)) {
             throw new ServiceException(406, "机构下该项目类型还未绑定任何项目，请先绑定");
         }
 
@@ -366,29 +365,29 @@ public class VillageServiceImpl implements VillageService {
         List<BuildRespVO> villageBuildList = new ArrayList<>();
         List<VillageRespVO> villageRespVOS = new ArrayList<>();
         for (VillageDO villageDO : dos) {
-            if(villageDO.getId() == null){
+            if (villageDO.getId() == null) {
                 continue;
             }
-            VillageRespVO villageRespVO = BeanUtils.toBean( villageDO, VillageRespVO.class );
-            villageList.add( villageRespVO );
-            List<BuildDO> buildDOS = buildMapper.selectList( new LambdaQueryWrapper<BuildDO>().eq( BuildDO::getVillageId, villageDO.getId() ) );
-            if(CollUtil.isNotEmpty( buildDOS )){
-                List<BuildRespVO> buildRespVOS = BeanUtils.toBean( buildDOS, BuildRespVO.class );
-                villageRespVO.setBuildList( buildRespVOS );
-                villageBuildList.addAll( buildRespVOS );
+            VillageRespVO villageRespVO = BeanUtils.toBean(villageDO, VillageRespVO.class);
+            villageList.add(villageRespVO);
+            List<BuildDO> buildDOS = buildMapper.selectList(new LambdaQueryWrapper<BuildDO>().eq(BuildDO::getVillageId, villageDO.getId()));
+            if (CollUtil.isNotEmpty(buildDOS)) {
+                List<BuildRespVO> buildRespVOS = BeanUtils.toBean(buildDOS, BuildRespVO.class);
+                villageRespVO.setBuildList(buildRespVOS);
+                villageBuildList.addAll(buildRespVOS);
             }
-            villageRespVOS.add( villageRespVO );
+            villageRespVOS.add(villageRespVO);
         }
-        respVO.setVillageList( villageList );
-        respVO.setVillageBuildList( villageBuildList );
-        respVO.setVillageRespVOS( villageRespVOS );
+        respVO.setVillageList(villageList);
+        respVO.setVillageBuildList(villageBuildList);
+        respVO.setVillageRespVOS(villageRespVOS);
 
         //查询建筑集合
         LambdaQueryWrapperX<VillageCollectionDO> queryWrapperX = new LambdaQueryWrapperX<>();
-        queryWrapperX.eq( VillageCollectionDO::getUid, SecurityFrameworkUtils.getLoginUserId() )
-                                .eq( VillageCollectionDO::getVillageType, villageReqVO.getType() );
-        List<VillageCollectionDO> collectionDOS = villageCollectionMapper.selectList( queryWrapperX );
-        respVO.setVillageCollectionRespVOS( BeanUtils.toBean( collectionDOS, VillageCollectionRespVO.class) );
+        queryWrapperX.eq(VillageCollectionDO::getUid, SecurityFrameworkUtils.getLoginUserId())
+                .eq(VillageCollectionDO::getVillageType, villageReqVO.getType());
+        List<VillageCollectionDO> collectionDOS = villageCollectionMapper.selectList(queryWrapperX);
+        respVO.setVillageCollectionRespVOS(BeanUtils.toBean(collectionDOS, VillageCollectionRespVO.class));
         /*查询用户选择的设置---保留代码后期如果做数据权限可以进行修改
         LambdaQueryWrapperX<SpercialSettingDO> queryWrapperX = new LambdaQueryWrapperX<SpercialSettingDO>();
         queryWrapperX.eq( SpercialSettingDO::getUid, SecurityFrameworkUtils.getLoginUserId() )
@@ -429,9 +428,9 @@ public class VillageServiceImpl implements VillageService {
     public CountDataVO projectManage(VillageReqVO villageReqVO) {
         CountDataVO countData = new CountDataVO();
         LambdaQueryWrapperX<VillageDO> wrapperX = new LambdaQueryWrapperX<>();
-        wrapperX.eq( VillageDO::getOrgId, TenantContextHolder.getTenantId())
-                .eq( VillageDO::getType, villageReqVO.getType() );
-        List<VillageDO> dos = villageMapper.selectList( wrapperX );
+        wrapperX.eq(VillageDO::getOrgId, TenantContextHolder.getTenantId())
+                .eq(VillageDO::getType, villageReqVO.getType());
+        List<VillageDO> dos = villageMapper.selectList(wrapperX);
         if (dos.isEmpty()) {
             return countData;
         }
@@ -483,14 +482,14 @@ public class VillageServiceImpl implements VillageService {
     public ProjectOverviewVO projectOverview(Long id) {
         ProjectOverviewVO projectOverviewVO = new ProjectOverviewVO();
         //查询项目
-        VillageDO villageDO = villageMapper.selectOne( new LambdaQueryWrapperX<VillageDO>().eq( VillageDO::getId, id ) );
-        if(villageDO == null){
+        VillageDO villageDO = villageMapper.selectOne(new LambdaQueryWrapperX<VillageDO>().eq(VillageDO::getId, id));
+        if (villageDO == null) {
             return projectOverviewVO;
         }
         //查询房间
-        List<RoomDO> roomDOS = roomMapper.selectList( new LambdaQueryWrapperX<RoomDO>().eq( RoomDO::getVillageId, villageDO.getId() ) );
-        if(CollUtil.isNotEmpty( roomDOS )){
-            projectOverviewVO.setHousesNum( roomDOS.size() );
+        List<RoomDO> roomDOS = roomMapper.selectList(new LambdaQueryWrapperX<RoomDO>().eq(RoomDO::getVillageId, villageDO.getId()));
+        if (CollUtil.isNotEmpty(roomDOS)) {
+            projectOverviewVO.setHousesNum(roomDOS.size());
             Integer contractCount = 0;
             BigDecimal managementArea = BigDecimal.ZERO;
             BigDecimal averagePrice = BigDecimal.ZERO;
@@ -500,34 +499,34 @@ public class VillageServiceImpl implements VillageService {
             BigDecimal WaitingArea = BigDecimal.ZERO;
             BigDecimal squareDay = BigDecimal.ZERO;
             for (RoomDO roomDO : roomDOS) {
-                if(roomDO.getRoomStatus() != null && roomDO.getRoomStatus() == 20){
+                if (roomDO.getRoomStatus() != null && roomDO.getRoomStatus() == 20) {
                     contractCount += 1;
-                    List<RoomPriceDO> roomPriceDOS = roomPriceMapper.selectList( new LambdaQueryWrapperX<RoomPriceDO>().eq( RoomPriceDO::getRoomId, roomDO.getId() ) );
-                    if(CollUtil.isNotEmpty( roomPriceDOS )){
-                        squareDay = squareDay.add( roomPriceDOS.get( 0 ).getSquareDay() == null? BigDecimal.ZERO : roomPriceDOS.get( 0 ).getSquareDay() );
+                    List<RoomPriceDO> roomPriceDOS = roomPriceMapper.selectList(new LambdaQueryWrapperX<RoomPriceDO>().eq(RoomPriceDO::getRoomId, roomDO.getId()));
+                    if (CollUtil.isNotEmpty(roomPriceDOS)) {
+                        squareDay = squareDay.add(roomPriceDOS.get(0).getSquareDay() == null ? BigDecimal.ZERO : roomPriceDOS.get(0).getSquareDay());
                     }
                 }
-                builtArea =  builtArea.add( roomDO.getBuildArea() == null ? BigDecimal.ZERO : roomDO.getBuildArea());
-                managementArea = managementArea.add( roomDO.getInsideArea() == null ? BigDecimal.ZERO : roomDO.getInsideArea());
-                rentedArea = rentedArea.add( roomDO.getRentalAreaIn() == null ? BigDecimal.ZERO : roomDO.getRentalAreaIn());
-                WaitingArea = WaitingArea.add( (roomDO.getRentalArea() == null ? BigDecimal.ZERO : roomDO.getRentalArea()).subtract( roomDO.getRentalAreaIn() == null ? BigDecimal.ZERO : roomDO.getRentalAreaIn() ));
+                builtArea = builtArea.add(roomDO.getBuildArea() == null ? BigDecimal.ZERO : roomDO.getBuildArea());
+                managementArea = managementArea.add(roomDO.getInsideArea() == null ? BigDecimal.ZERO : roomDO.getInsideArea());
+                rentedArea = rentedArea.add(roomDO.getRentalAreaIn() == null ? BigDecimal.ZERO : roomDO.getRentalAreaIn());
+                WaitingArea = WaitingArea.add((roomDO.getRentalArea() == null ? BigDecimal.ZERO : roomDO.getRentalArea()).subtract(roomDO.getRentalAreaIn() == null ? BigDecimal.ZERO : roomDO.getRentalAreaIn()));
 
             }
 
-            projectOverviewVO.setContractCount( contractCount );
-            projectOverviewVO.setManagementArea( managementArea );
-            projectOverviewVO.setBuiltArea( builtArea );
-            projectOverviewVO.setWaitingArea( WaitingArea );
-            projectOverviewVO.setRentedArea( rentedArea );
+            projectOverviewVO.setContractCount(contractCount);
+            projectOverviewVO.setManagementArea(managementArea);
+            projectOverviewVO.setBuiltArea(builtArea);
+            projectOverviewVO.setWaitingArea(WaitingArea);
+            projectOverviewVO.setRentedArea(rentedArea);
 
             rentalRate = rentedArea.compareTo(BigDecimal.ZERO) > 0
-                    ? rentedArea.divide(rentedArea.add( WaitingArea ), 2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100))
+                    ? rentedArea.divide(rentedArea.add(WaitingArea), 2, BigDecimal.ROUND_HALF_UP).multiply(new BigDecimal(100))
                     : BigDecimal.ZERO;
-            projectOverviewVO.setRentalRate( rentalRate );
+            projectOverviewVO.setRentalRate(rentalRate);
             averagePrice = squareDay.compareTo(BigDecimal.ZERO) > 0
                     ? squareDay.divide(new BigDecimal(contractCount), 2, BigDecimal.ROUND_HALF_UP)
                     : BigDecimal.ZERO;
-            projectOverviewVO.setAveragePrice( averagePrice );
+            projectOverviewVO.setAveragePrice(averagePrice);
         }
 
         return projectOverviewVO;

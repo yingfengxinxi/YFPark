@@ -93,7 +93,7 @@
             <el-table-column label="备注" value="remark" />
             <el-table-column label="操作" width="100" fixed="right">
               <template #default="scope">
-                <el-button type="primary" link @click="toDo(scope.row)">编辑</el-button>
+                <el-button type="primary" link @click="需要替换(scope.row)">编辑</el-button>
               </template>
             </el-table-column>
           </el-table>
@@ -135,7 +135,7 @@ const open = async (orderId?: number) => {
   getList()
 }
 const formRef_updateOrgBill = ref()
-const toDo = async (row) => {
+const 需要替换 = async (row) => {
   console.log(row)
   formRef_updateOrgBill.value.open(row)
 }

@@ -75,7 +75,7 @@ public class UserExtendsPageReqVO extends PageParam {
     @Schema(description = "职务")
     private String position;
 
-    @Schema(description = "称呼", example = "芋艿")
+    @Schema(description = "称呼", example = "智慧园区")
     private String callName;
 
     @Schema(description = "公司传真")

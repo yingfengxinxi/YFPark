@@ -126,7 +126,7 @@ public class DiyTemplateServiceImpl implements DiyTemplateService {
     public void useDiyTemplate(Long id) {
         // 校验存在
         validateDiyTemplateExists(id);
-        // TODO @疯狂：要不已使用的情况，抛个业务异常？
+        // 需要替换 @疯狂：要不已使用的情况，抛个业务异常？
         // 已使用的更新为未使用
         DiyTemplateDO used = diyTemplateMapper.selectByUsed(true);
         if (used != null) {

@@ -93,7 +93,7 @@
                     </el-form-item>
                   </el-col>
                   <!-- 优惠券待处理  也可以参考优惠劵的SpuShowcase-->
-                  <!-- TODO 待实现！-->
+                  <!-- 需要替换 待实现！-->
                   <el-col :span="24">
                     <el-checkbox label="送优惠券" name="type" />
                   </el-col>
@@ -102,7 +102,7 @@
             </e-form>
           </el-row>
         </template>
-        <!-- TODO 实现：建议改成放在每一个【活动层级】的下面，有点类似主子表 -->
+        <!-- 需要替换 实现：建议改成放在每一个【活动层级】的下面，有点类似主子表 -->
         <el-button type="primary" @click="addActivityStratum">添加活动层级</el-button>
       </el-form-item>
       <el-form-item label="活动商品" prop="productScope">
@@ -116,7 +116,7 @@
           </el-radio>
         </el-radio-group>
       </el-form-item>
-      <!-- TODO：活动商品的开发，可以参考优惠劵的，已经搞好啦； -->
+      <!-- 需要替换：活动商品的开发，可以参考优惠劵的，已经搞好啦； -->
       <el-form-item
         v-if="formData.productScope === PromotionProductScopeEnum.SPU.scope"
         prop="productSpuIds"
@@ -215,7 +215,7 @@ const open = async (type: string, id?: number) => {
       data.startAndEndTime = [new Date(data.startTime), new Date(data.endTime)]
       activityRules.splice(0, activityRules.length)
       data.rules.forEach((item) => {
-        // TODO 是不是不用 reactive，直接 [] 就可以了？
+        // 需要替换 是不是不用 reactive，直接 [] 就可以了？
         let array: string[] = reactive([])
         if (item.freeDelivery) {
           array.push('包邮')

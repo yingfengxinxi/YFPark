@@ -97,7 +97,7 @@ const makeTemplate = () => {
       option.value = formCreate.parseJson('${JSON.stringify(opt)}')
     }
     const onSubmit = (formData) => {
-      //todo 提交表单
+      //需要替换 提交表单
     }
     init()
   <\/script>`

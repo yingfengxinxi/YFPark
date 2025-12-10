@@ -36,6 +36,7 @@ public class ContractLeaveController {
     @Resource
     private ContractLeaveService contractLeaveService;
 
+    //合同审批的创建、修改、删除、导出、分页查询，迁移到本模块中进行管理
     @PostMapping("/create")
     @Operation(summary = "创建合同审批")
     @PreAuthorize("@ss.hasPermission('bus:contract-leave:create')")

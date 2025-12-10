@@ -265,7 +265,7 @@ const menuListToBackend = () => {
 }
 
 // 将前端的 menu，转换成后端接收的 menu
-// TODO: @芋艿，需要根据后台API删除不需要的字段
+// 需要替换: @芋艿，需要根据后台API删除不需要的字段
 const menuToBackend = (menu: any) => {
   let result = {
     ...menu,

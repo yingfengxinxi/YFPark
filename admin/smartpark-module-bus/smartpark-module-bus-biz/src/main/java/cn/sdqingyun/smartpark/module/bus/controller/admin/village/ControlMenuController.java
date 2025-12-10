@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.constraints.*;
 import jakarta.validation.*;
 import jakarta.servlet.http.*;
+
 import java.util.*;
 import java.io.IOException;
 
@@ -18,11 +19,13 @@ import cn.sdqingyun.smartpark.framework.common.pojo.PageParam;
 import cn.sdqingyun.smartpark.framework.common.pojo.PageResult;
 import cn.sdqingyun.smartpark.framework.common.pojo.CommonResult;
 import cn.sdqingyun.smartpark.framework.common.util.object.BeanUtils;
+
 import static cn.sdqingyun.smartpark.framework.common.pojo.CommonResult.success;
 
 import cn.sdqingyun.smartpark.framework.excel.core.util.ExcelUtils;
 
 import cn.sdqingyun.smartpark.framework.apilog.core.annotation.ApiAccessLog;
+
 import static cn.sdqingyun.smartpark.framework.apilog.core.enums.OperateTypeEnum.*;
 
 import cn.sdqingyun.smartpark.module.bus.controller.admin.village.vo.*;
@@ -84,12 +87,12 @@ public class ControlMenuController {
     @PreAuthorize("@ss.hasPermission('bus:control-menu:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportControlMenuExcel(@Valid ControlMenuPageReqVO pageReqVO,
-              HttpServletResponse response) throws IOException {
+                                       HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<ControlMenuDO> list = controlMenuService.getControlMenuPage(pageReqVO).getList();
         // 导出 Excel
         ExcelUtils.write(response, "项目租控管理菜单.xls", "数据", ControlMenuRespVO.class,
-                        BeanUtils.toBean(list, ControlMenuRespVO.class));
+                BeanUtils.toBean(list, ControlMenuRespVO.class));
     }
 
 }

@@ -15,7 +15,7 @@ import static cn.sdqingyun.smartpark.framework.common.util.date.DateUtils.FORMAT
 @ToString(callSuper = true)
 public class TagTerminationPageReqVO extends PageParam {
 
-    @Schema(description = "标签名称", example = "芋艿")
+    @Schema(description = "标签名称", example = "智慧园区")
     private String name;
 
     @Schema(description = "标签描述")

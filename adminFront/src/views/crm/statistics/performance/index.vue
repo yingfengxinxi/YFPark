@@ -100,7 +100,7 @@ const userListByDeptId = computed(() =>
     : []
 )
 
-// TODO @scholar：改成尾注释，保证 vue 内容短一点；变量名小写
+// 需要替换 @scholar：改成尾注释，保证 vue 内容短一点；变量名小写
 // 活跃标签
 const activeTab = ref('ContractCountPerformance')
 // 1.员工合同数量统计
@@ -119,7 +119,7 @@ const handleQuery = () => {
   const fullDate = new Date(selectYear, 0, 1, 0, 0, 0)
 
   // 将完整的日期时间格式化为需要的字符串形式，比如 2004-01-01 00:00:00
-  // TODO @scholar：看看，是不是可以使用 year 哈
+  // 需要替换 @scholar：看看，是不是可以使用 year 哈
   queryParams.times[0] = `${fullDate.getFullYear()}-${String(fullDate.getMonth() + 1).padStart(
     2,
     '0'

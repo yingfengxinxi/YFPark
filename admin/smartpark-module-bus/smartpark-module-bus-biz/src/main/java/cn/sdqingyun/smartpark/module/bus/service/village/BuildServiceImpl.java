@@ -157,6 +157,7 @@ public class BuildServiceImpl implements BuildService {
 
     @Override
     public PageResult<BuildDO> getBuildPage(BuildPageReqVO pageReqVO) {
+        //分页查询相关项目信息
         return buildMapper.selectPage(pageReqVO);
     }
 

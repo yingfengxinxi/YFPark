@@ -22,7 +22,7 @@ public class BuildRespVO {
     @ExcelProperty("楼栋编号")
     private String buildNumber;
 
-    @Schema(description = "楼栋名称", example = "芋艿")
+    @Schema(description = "楼栋名称", example = "智慧园区")
     @ExcelProperty("楼栋名称")
     private String buildName;
 

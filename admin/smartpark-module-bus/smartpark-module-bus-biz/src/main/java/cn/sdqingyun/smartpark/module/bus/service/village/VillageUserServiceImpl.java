@@ -92,7 +92,7 @@ public class VillageUserServiceImpl implements VillageUserService {
                 throw new ServiceException(406, "创建用户失败,"+longCommonResult.getMsg());
             }
 
-            //todo :需要修改成配置
+            //需要替换 :需要修改成配置
             Set<Long> roleIds = new HashSet<>();
             roleIds.add( 164L );
             permissionApi.assignUserRole( longCommonResult.getData(),roleIds  );

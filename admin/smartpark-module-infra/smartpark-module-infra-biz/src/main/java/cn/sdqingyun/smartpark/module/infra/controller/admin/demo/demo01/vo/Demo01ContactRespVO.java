@@ -24,7 +24,7 @@ public class Demo01ContactRespVO {
 
     @Schema(description = "性别", requiredMode = Schema.RequiredMode.REQUIRED, example = "1")
     @ExcelProperty(value = "性别", converter = DictConvert.class)
-    @DictFormat("system_user_sex") // TODO 代码优化：建议设置到对应的 DictTypeConstants 枚举类中
+    @DictFormat("system_user_sex") // 需要替换 代码优化：建议设置到对应的 DictTypeConstants 枚举类中
     private Integer sex;
 
     @Schema(description = "出生年", requiredMode = Schema.RequiredMode.REQUIRED)

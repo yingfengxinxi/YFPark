@@ -25,7 +25,7 @@ public class OwnerRespVO {
     @ExcelProperty("机构ID")
     private Long orgId;
 
-    @Schema(description = "租客名称", example = "芋艿")
+    @Schema(description = "租客名称", example = "智慧园区")
     @ExcelProperty("租客名称")
     private String name;
 

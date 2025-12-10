@@ -21,7 +21,7 @@ public class VillageCollectionPageReqVO extends PageParam {
     @Schema(description = "用户ID", example = "1582")
     private Long uid;
 
-    @Schema(description = "集合名称", example = "芋艿")
+    @Schema(description = "集合名称", example = "智慧园区")
     private String collectionName;
 
     @Schema(description = "集合下的楼宇列表")

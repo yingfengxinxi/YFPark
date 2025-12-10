@@ -32,7 +32,7 @@ public class PropertyStuffReturnSaveReqVO  extends TenantBaseDO {
     @NotNull(message = "申请部门id不能为空")
     private Long departmentId;
 
-    @Schema(description = "申请部门", example = "芋艿")
+    @Schema(description = "申请部门", example = "智慧园区")
     private String departmentName;
 
     @Schema(description = "归还仓库id", requiredMode = Schema.RequiredMode.REQUIRED, example = "5855")

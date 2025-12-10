@@ -28,7 +28,7 @@
             <el-image :src="conversation.avatar" class="avatar" />
             <span class="title">{{ conversation.title }}</span>
             <span class="button">
-              <!-- TODO 芋艿：缺置顶按钮 -->
+              <!-- 需要替换 芋艿：缺置顶按钮 -->
               <el-icon title="编辑" @click="updateConversationTitle(conversation)">
                 <Icon icon="ep:edit" />
               </el-icon>
@@ -39,7 +39,7 @@
           </div>
         </el-row>
       </div>
-      <!-- 左底部：工具栏 TODO 芋艿：50% 不太对 -->
+      <!-- 左底部：工具栏 需要替换 芋艿：50% 不太对 -->
       <div class="tool-box">
         <sapn class="w-1/2"> <Icon icon="ep:user" /> 角色仓库 </sapn>
         <sapn class="w-1/2"> <Icon icon="ep:delete" />清空未置顶对话</sapn>
@@ -47,7 +47,7 @@
     </el-aside>
     <!-- 右侧：会话详情 -->
     <el-container class="detail-container">
-      <!-- 右顶部 TODO 芋艿：右对齐 -->
+      <!-- 右顶部 需要替换 芋艿：右对齐 -->
       <el-header class="header">
         <el-button>3.5-turbo-0125 <Icon icon="ep:setting" /></el-button>
         <el-button>
@@ -82,26 +82,26 @@ const conversationList = [
 ]
 const conversationId = ref(1)
 const searchName = ref('')
-const leftHeight = window.innerHeight - 240 // TODO 芋艿：这里还不太对
+const leftHeight = window.innerHeight - 240 // 需要替换 芋艿：这里还不太对
 
 const changeConversation = (conversation) => {
   console.log(conversation)
   conversationId.value = conversation.id
-  // TODO 芋艿：待实现
+  // 需要替换 芋艿：待实现
 }
 
 const updateConversationTitle = (conversation) => {
   console.log(conversation)
-  // TODO 芋艿：待实现
+  // 需要替换 芋艿：待实现
 }
 
 const deleteConversationTitle = (conversation) => {
   console.log(conversation)
-  // TODO 芋艿：待实现
+  // 需要替换 芋艿：待实现
 }
 
 const searchConversation = () => {
-  // TODO 芋艿：待实现
+  // 需要替换 芋艿：待实现
 }
 </script>
 <style lang="scss" scoped>
@@ -114,7 +114,7 @@ const searchConversation = () => {
       padding: 5px 5px 0 0;
       cursor: pointer;
       &.active {
-        // TODO 芋艿：这里不太对
+        // 需要替换 芋艿：这里不太对
         background-color: #343540;
         .button {
           display: inline;

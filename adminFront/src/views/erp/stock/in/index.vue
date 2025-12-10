@@ -371,6 +371,6 @@ onMounted(async () => {
   supplierList.value = await SupplierApi.getSupplierSimpleList()
   userList.value = await UserApi.getSimpleUserList()
 })
-// TODO 芋艿：可优化功能：列表界面，支持导入
-// TODO 芋艿：可优化功能：详情界面，支持打印
+// 需要替换 芋艿：可优化功能：列表界面，支持导入
+// 需要替换 芋艿：可优化功能：详情界面，支持打印
 </script>

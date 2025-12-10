@@ -62,7 +62,7 @@ public class PatrolRecordEquipmentRespVO {
     @ExcelProperty("巡检人uid")
     private Long uid;
 
-    @Schema(description = "巡检人名称", example = "芋艿")
+    @Schema(description = "巡检人名称", example = "智慧园区")
     @ExcelProperty("巡检人名称")
     private String name;
 

@@ -86,18 +86,18 @@ public class BuildController {
     @PreAuthorize("@ss.hasPermission('bus:build:export')")
     @ApiAccessLog(operateType = EXPORT)
     public void exportBuildExcel(@Valid BuildPageReqVO pageReqVO,
-              HttpServletResponse response) throws IOException {
+                                 HttpServletResponse response) throws IOException {
         pageReqVO.setPageSize(PageParam.PAGE_SIZE_NONE);
         List<BuildDO> list = buildService.getBuildPage(pageReqVO).getList();
         // 导出 Excel
         ExcelUtils.write(response, "项目楼栋.xls", "数据", BuildRespVO.class,
-                        BeanUtils.toBean(list, BuildRespVO.class));
+                BeanUtils.toBean(list, BuildRespVO.class));
     }
 
     @PostMapping("/projectBuild")
     @Operation(summary = "建筑列表统计")
     @PreAuthorize("@ss.hasPermission('bus:build:query')")
-    public CommonResult<CountBuildDataVO> projectBuild(@RequestBody BuildReqVO  buildReqVO) {
+    public CommonResult<CountBuildDataVO> projectBuild(@RequestBody BuildReqVO buildReqVO) {
 
         return success(buildService.projectBuild(buildReqVO));
     }

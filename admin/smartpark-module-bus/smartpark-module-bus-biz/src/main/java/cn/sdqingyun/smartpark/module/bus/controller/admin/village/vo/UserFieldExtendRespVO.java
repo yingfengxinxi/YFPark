@@ -29,7 +29,7 @@ public class UserFieldExtendRespVO {
     @ExcelProperty("关联 village_user_system_field_extend id")
     private Long sysFieldId;
 
-    @Schema(description = "字段名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @Schema(description = "字段名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "智慧园区")
     @ExcelProperty("字段名称")
     private String fieldName;
 

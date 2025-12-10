@@ -24,7 +24,7 @@ public class UserRespVO{
     @ExcelProperty("用户名称")
     private String username;
 
-    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @Schema(description = "用户昵称", requiredMode = Schema.RequiredMode.REQUIRED, example = "智慧园区")
     @ExcelProperty("用户昵称")
     private String nickname;
 

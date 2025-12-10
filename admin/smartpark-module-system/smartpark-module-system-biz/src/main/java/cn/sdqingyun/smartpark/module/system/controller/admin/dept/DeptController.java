@@ -22,7 +22,7 @@ import java.util.List;
 
 import static cn.sdqingyun.smartpark.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 部门")
+@Tag(name = "管理后台 - 园区部门")
 @RestController
 @RequestMapping("/system/dept")
 @Validated

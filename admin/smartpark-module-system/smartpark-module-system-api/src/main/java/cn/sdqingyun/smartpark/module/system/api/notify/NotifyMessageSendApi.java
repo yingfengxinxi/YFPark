@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = ApiConstants.NAME) // TODO 芋艿：fallbackFactory =
+@FeignClient(name = ApiConstants.NAME) // 需要替换 智慧园区：fallbackFactory =
 @Tag(name = "RPC 服务 - 站内信发送")
 public interface NotifyMessageSendApi {
 

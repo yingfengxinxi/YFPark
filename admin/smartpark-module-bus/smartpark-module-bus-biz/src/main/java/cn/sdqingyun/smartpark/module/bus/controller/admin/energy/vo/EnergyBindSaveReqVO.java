@@ -44,7 +44,7 @@ public class EnergyBindSaveReqVO  extends TenantBaseDO {
     @NotNull(message = "关联自定义表ID不能为空")
     private Long parentEnergyId;
 
-    @Schema(description = "表名称", example = "芋艿")
+    @Schema(description = "表名称", example = "智慧园区")
     private String name;
 
     @Schema(description = "绑定表数据集合，json存储")

@@ -22,7 +22,7 @@ public class VillageRespVO {
     @ExcelProperty("项目名称")
     private String name;
 
-    @Schema(description = "项目名称缩写", example = "芋艿")
+    @Schema(description = "项目名称缩写", example = "智慧园区")
     @ExcelProperty("项目名称缩写")
     private String shortName;
 

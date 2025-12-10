@@ -15,7 +15,7 @@ import static cn.sdqingyun.smartpark.framework.common.util.date.DateUtils.FORMAT
 @ToString(callSuper = true)
 public class VillageTypePageReqVO extends PageParam {
 
-    @Schema(description = "类型名称", example = "芋艿")
+    @Schema(description = "类型名称", example = "智慧园区")
     private String name;
 
     @Schema(description = "类型别名")

@@ -19,10 +19,10 @@ public class BailingOrgConfigPageReqVO extends PageParam {
     @Schema(description = "机构ID", example = "8904")
     private Long orgId;
 
-    @Schema(description = "类型【数据字典值BAILING_ORG_CONFIG】", example = "芋艿")
+    @Schema(description = "类型【数据字典值BAILING_ORG_CONFIG】", example = "智慧园区")
     private String type;
 
-    @Schema(description = "名称", example = "芋艿")
+    @Schema(description = "名称", example = "智慧园区")
     private String key;
 
     @Schema(description = "值")

@@ -921,7 +921,7 @@ public class ContractServiceImpl implements ContractService {
         queryWrapperX.eq(ContractOrderBillDO::getBillStatus, "2");
         List<ContractOrderBillDO> contractOrderBillDOS = orderBillMapper.selectList(queryWrapperX);
         if (CollectionUtils.isNotEmpty(contractOrderBillDOS)) {
-            return new BigDecimal(contractOrderBillDOS.stream().mapToDouble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getLateFee())).sum());
+            return new BigDecimal(contractOrderBillDOS.stream().map需要替换uble(ContractOrderBillDO -> Double.parseDouble(ContractOrderBillDO.getLateFee())).sum());
         }
         return new BigDecimal("0.00");
     }

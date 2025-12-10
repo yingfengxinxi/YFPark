@@ -4,8 +4,8 @@ export type TaskVO = {
   id: number
 }
 
-export const getTaskTodoPage = async (params: any) => {
-  return await request.get({ url: '/bpm/task/todo-page', params })
+export const getTask需要替换Page = async (params: any) => {
+  return await request.get({ url: '/bpm/task/需要替换-page', params })
 }
 
 export const getTaskDonePage = async (params: any) => {

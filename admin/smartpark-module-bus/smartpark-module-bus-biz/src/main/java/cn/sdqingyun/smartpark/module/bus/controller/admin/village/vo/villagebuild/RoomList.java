@@ -5,7 +5,7 @@ import lombok.Data;
 
 /**
  * @ClassName RoomStatusColor
- * @Description TODO
+ * @Description 需要替换
  * @Author SUNk
  * @Date 2024/6/20 17:32
  * @ModifyDate 2024/6/20 17:32

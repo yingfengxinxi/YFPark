@@ -116,7 +116,7 @@ const toLastView = () => {
       addTags()
       return
     }
-    // TODO: You can set another route
+    // 需要替换: You can set another route
     push('/')
   }
 }

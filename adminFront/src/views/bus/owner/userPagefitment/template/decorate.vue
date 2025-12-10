@@ -29,7 +29,7 @@
   </div>
 </template>
 <script setup lang="ts">
-// TODO @疯狂：要不要建个 decorate 目录，然后挪进去，改成 index.vue，这样可以更明确看到是个独立界面哈，更好找
+// 需要替换 @疯狂：要不要建个 decorate 目录，然后挪进去，改成 index.vue，这样可以更明确看到是个独立界面哈，更好找
 import * as DiyTemplateApi from '@/api/mall/promotion/diy/template'
 import * as DiyPageApi from '@/api/mall/promotion/diy/page'
 import { useTagsViewStore } from '@/store/modules/tagsView'

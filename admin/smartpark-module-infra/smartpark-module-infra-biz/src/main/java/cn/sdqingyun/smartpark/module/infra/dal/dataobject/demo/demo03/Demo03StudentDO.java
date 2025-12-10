@@ -35,7 +35,7 @@ public class Demo03StudentDO extends BaseDO {
     /**
      * 性别
      *
-     * 枚举 {@link TODO system_user_sex 对应的类}
+     * 枚举 {@link 需要替换 system_user_sex 对应的类}
      */
     private Integer sex;
     /**

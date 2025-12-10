@@ -28,7 +28,7 @@ import java.util.List;
 import static cn.sdqingyun.smartpark.framework.apilog.core.enums.OperateTypeEnum.EXPORT;
 import static cn.sdqingyun.smartpark.framework.common.pojo.CommonResult.success;
 
-@Tag(name = "管理后台 - 字典类型")
+@Tag(name = "管理后台 - 园区后台字典类型")
 @RestController
 @RequestMapping("/system/dict-type")
 @Validated

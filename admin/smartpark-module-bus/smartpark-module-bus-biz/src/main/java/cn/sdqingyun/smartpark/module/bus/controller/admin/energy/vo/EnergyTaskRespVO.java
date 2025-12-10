@@ -33,7 +33,7 @@ public class EnergyTaskRespVO {
     @ExcelProperty("任务key")
     private String taskKey;
 
-    @Schema(description = "任务名称", example = "芋艿")
+    @Schema(description = "任务名称", example = "智慧园区")
     @ExcelProperty("任务名称")
     private String taskName;
 

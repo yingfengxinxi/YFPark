@@ -40,7 +40,7 @@ public class ${table.className}DO extends TenantBaseDO {
      * ${column.columnComment}
     #if ("$!column.dictType" != "")##处理枚举值
      *
-     * 枚举 {@link TODO ${column.dictType} 对应的类}
+     * 枚举 {@link 需要替换 ${column.dictType} 对应的类}
     #end
      */
     #if (${column.primaryKey})##处理主键

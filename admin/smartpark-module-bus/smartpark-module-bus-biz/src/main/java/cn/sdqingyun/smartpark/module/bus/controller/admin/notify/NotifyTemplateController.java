@@ -35,7 +35,7 @@ public class NotifyTemplateController {
         map.put("day", "80");
         map.put("link", "链接");
 
-        NotifySendSingleToUserReqDTO notifySendSingleToUserReqDTO=new NotifySendSingleToUserReqDTO();
+        NotifySendSingleToUserReqDTO notifySendSingleToUserReqDTO = new NotifySendSingleToUserReqDTO();
         notifySendSingleToUserReqDTO.setTemplateCode("SMS_468715011");
         notifySendSingleToUserReqDTO.setUserId(1L);
         notifySendSingleToUserReqDTO.setTemplateParams(map);

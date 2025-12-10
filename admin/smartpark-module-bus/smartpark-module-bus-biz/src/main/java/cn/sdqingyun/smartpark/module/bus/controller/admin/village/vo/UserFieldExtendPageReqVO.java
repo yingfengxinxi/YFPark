@@ -24,7 +24,7 @@ public class UserFieldExtendPageReqVO extends PageParam {
     @Schema(description = "关联 village_user_system_field_extend id", example = "16431")
     private Long sysFieldId;
 
-    @Schema(description = "字段名称", example = "芋艿")
+    @Schema(description = "字段名称", example = "智慧园区")
     private String fieldName;
 
     @Schema(description = "表单名称", example = "张三")

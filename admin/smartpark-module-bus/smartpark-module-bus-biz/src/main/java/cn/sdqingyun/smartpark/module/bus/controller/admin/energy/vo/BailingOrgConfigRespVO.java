@@ -21,12 +21,12 @@ public class BailingOrgConfigRespVO {
     @ExcelProperty("机构ID")
     private Long orgId;
 
-    @Schema(description = "类型【数据字典值BAILING_ORG_CONFIG】", example = "芋艿")
+    @Schema(description = "类型【数据字典值BAILING_ORG_CONFIG】", example = "智慧园区")
     @ExcelProperty("类型【数据字典值BAILING_ORG_CONFIG】")
     private String type;
     private String typeName;
 
-    @Schema(description = "名称", example = "芋艿")
+    @Schema(description = "名称", example = "智慧园区")
     @ExcelProperty("名称")
     private String key;
 

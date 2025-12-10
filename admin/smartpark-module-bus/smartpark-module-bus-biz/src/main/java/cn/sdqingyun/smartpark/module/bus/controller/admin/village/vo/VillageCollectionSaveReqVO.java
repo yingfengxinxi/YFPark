@@ -20,7 +20,7 @@ public class VillageCollectionSaveReqVO  extends TenantBaseDO {
     @NotNull(message = "用户ID不能为空")
     private Long uid;
 
-    @Schema(description = "集合名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "芋艿")
+    @Schema(description = "集合名称", requiredMode = Schema.RequiredMode.REQUIRED, example = "智慧园区")
     @NotEmpty(message = "集合名称不能为空")
     private String collectionName;
 

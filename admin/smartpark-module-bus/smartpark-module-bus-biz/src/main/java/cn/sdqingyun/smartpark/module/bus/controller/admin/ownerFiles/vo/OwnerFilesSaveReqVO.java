@@ -25,7 +25,7 @@ public class OwnerFilesSaveReqVO  extends TenantBaseDO {
     @NotNull(message = "用户服务ID不能为空")
     private Long uid;
 
-    @Schema(description = "文件名", example = "芋艿")
+    @Schema(description = "文件名", example = "智慧园区")
     private String name;
 
     @Schema(description = "文件网址", requiredMode = Schema.RequiredMode.REQUIRED, example = "https://xxx")

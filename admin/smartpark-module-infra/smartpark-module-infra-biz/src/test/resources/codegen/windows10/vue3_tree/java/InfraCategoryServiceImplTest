@@ -106,7 +106,7 @@ public class InfraCategoryServiceImplTest extends BaseDbUnitTest {
     }
 
     @Test
-    @Disabled  // TODO 请修改 null 为需要的值，然后删除 @Disabled 注解
+    @Disabled  // 需要替换 请修改 null 为需要的值，然后删除 @Disabled 注解
     public void testGetCategoryList() {
        // mock 数据
        InfraCategoryDO dbCategory = randomPojo(InfraCategoryDO.class, o -> { // 等会查询到

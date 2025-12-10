@@ -13,7 +13,7 @@ public class OrgSellerSaveReqVO  extends TenantBaseDO {
     @Schema(description = "编号", requiredMode = Schema.RequiredMode.REQUIRED, example = "31291")
     private Long id;
 
-    @Schema(description = "售方公司名称", example = "芋艿")
+    @Schema(description = "售方公司名称", example = "智慧园区")
     private String companyName;
 
     @Schema(description = "纳税人识别号")

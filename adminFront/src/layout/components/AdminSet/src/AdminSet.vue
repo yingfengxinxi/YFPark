@@ -71,7 +71,7 @@ const toCompany = async () => {
   // appStore.setShowTwoMenu(false)
   push('/setting/busorg')
 }
-const toDocument = () => {
+const 需要替换cument = () => {
   window.open('https://doc.iocoder.cn/')
 }
 </script>

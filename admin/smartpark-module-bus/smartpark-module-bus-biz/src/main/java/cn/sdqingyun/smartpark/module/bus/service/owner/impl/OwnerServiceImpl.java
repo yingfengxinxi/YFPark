@@ -93,6 +93,7 @@ public class OwnerServiceImpl implements OwnerService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public Long create(OwnerSaveReqVO createReqVO) {
+        //租客信息的创建，先创建部门信息然后进行数据挂载
         //查询部门信息，如果已有则不允许创建
         CommonResult<DeptRespDTO> deptByName = depApi.getDeptByName( createReqVO.getName() );
         if (deptByName.isSuccess() && deptByName.getData() != null) {
@@ -132,7 +133,7 @@ public class OwnerServiceImpl implements OwnerService {
             userId = userByPhone.getData().getId();
         }
 
-        //todo :需要修改成配置
+        //需要替换 :需要修改成配置
         Set<Long> roleIds = new HashSet<>();
         roleIds.add( 163L );
         permissionApi.assignUserRole( userId, roleIds );

@@ -45,7 +45,7 @@ public class WorkOrderProposeOrderPageReqVO extends PageParam {
     @Schema(description = "租客名称", example = "16069")
     private String ownerName;
 
-    @Schema(description = "订单名称", example = "芋艿")
+    @Schema(description = "订单名称", example = "智慧园区")
     private String orderName;
 
     @Schema(description = "订单编号")

@@ -15,7 +15,7 @@ import static cn.sdqingyun.smartpark.framework.common.util.date.DateUtils.FORMAT
 @ToString(callSuper = true)
 public class OrgSellerPageReqVO extends PageParam {
 
-    @Schema(description = "售方公司名称", example = "芋艿")
+    @Schema(description = "售方公司名称", example = "智慧园区")
     private String companyName;
 
     @Schema(description = "纳税人识别号")

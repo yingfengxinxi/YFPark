@@ -31,7 +31,7 @@ defineOptions({ name: 'WxVoicePlayer' })
 
 const props = defineProps({
   url: {
-    type: String, // 语音地址，例如说：https://www.iocoder.cn/xxx.amr
+    type: String, // 语音地址，例如说：https://www.xxxx.cn/xxx.amr
     required: true
   },
   content: {
@@ -84,7 +84,7 @@ const amrStop = () => {
   playing.value = false
   amr.value.stop()
 }
-// TODO 芋艿：下面样式有点问题
+// 需要替换 芋艿：下面样式有点问题
 </script>
 <style lang="scss" scoped>
 .wx-voice-div {

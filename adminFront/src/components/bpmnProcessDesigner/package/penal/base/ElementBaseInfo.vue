@@ -99,7 +99,7 @@ const handleNameUpdate = (value) => {
   }, 100)
 }
 // const handleDescriptionUpdate=(value)=> {
-// TODO 芋艿：documentation 暂时无法修改，后续在看看
+// 需要替换 芋艿：documentation 暂时无法修改，后续在看看
 // this.elementBaseInfo['documentation'] = value;
 // this.updateBaseInfo('documentation');
 // }

@@ -49,7 +49,7 @@ public class PatrolRecordEquipmentSaveReqVO  extends TenantBaseDO {
     @Schema(description = "巡检人uid", example = "21596")
     private Long uid;
 
-    @Schema(description = "巡检人名称", example = "芋艿")
+    @Schema(description = "巡检人名称", example = "智慧园区")
     private String name;
 
     @Schema(description = "巡检点位置信息")
